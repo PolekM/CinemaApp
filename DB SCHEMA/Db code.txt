@@ -1,0 +1,91 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table app_role {
+  role_id integer [primary key]
+  name varchar
+ 
+}
+
+Table app_users {
+  user_id integer [primary key]
+  login varchar
+  password varchar
+  email email
+  user_role integer
+}
+Table seats {
+  seat_id integer [primary key]
+  row_number varchar
+  seat_number integer
+  room_id integer
+ 
+}
+
+Table seans {
+  seans_id integer [primary key]
+  ticket_cost integer
+  start_date timestamp
+  end_date timestamp
+  room_id integer
+  movie_id integer
+}
+
+Table rooms {
+  room_id integer [primary key]
+  room_name varchar
+  seats_count integer
+ 
+}
+
+Table movies {
+  movie_id integer [primary key]
+  title varchar
+  description varchar
+  yera_of_production timestamp
+  species_id integer
+  
+}
+Table species {
+  species_id integer [primary key]
+  name varchar
+}
+
+Table reservation_seat {
+  seat_id integer
+  reservation_id integer
+
+}
+Table reservation {
+  reservation_id integer [primary key]
+  user_id integer
+  seans_id integer
+  status_id varchar
+}
+
+Table status {
+  status_id integer [primary key]
+  status_name varchar
+}
+
+
+
+Ref: "app_role"."role_id" < "app_users"."user_role"
+
+Ref: "rooms"."room_id" < "seats"."room_id"
+
+Ref: "rooms"."room_id" < "seans"."room_id"
+
+Ref: "species"."species_id" < "movies"."species_id"
+
+Ref: "movies"."movie_id" < "seans"."movie_id"
+
+Ref: "seans"."seans_id" < "reservation"."seans_id"
+
+Ref: "app_users"."user_id" < "reservation"."user_id"
+
+Ref: "status"."status_id" < "reservation"."status_id"
+
+Ref: "reservation_seat"."reservation_id" < "reservation"."reservation_id"
+
+Ref: "reservation_seat"."seat_id" > "seats"."seat_id"
