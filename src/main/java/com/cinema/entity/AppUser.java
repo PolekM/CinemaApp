@@ -11,13 +11,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "app_role")
-public class AppRole {
+@Table(name = "app_user")
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name")
-    private String roleName;
+    private String login;
+    private String password;
+    private String Email;
+    @ManyToOne
+    @JoinColumn(name = "app_role_id")
+    private AppRole userRole;
 
 }
