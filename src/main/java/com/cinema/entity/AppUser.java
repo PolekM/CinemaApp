@@ -22,7 +22,7 @@ public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String login;
     private String password;
     private String Email;
@@ -32,7 +32,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(this.userRole.toString()));
+        return Collections.singleton(new SimpleGrantedAuthority(this.userRole.getRoleName()));
     }
 
     @Override
