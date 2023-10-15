@@ -7,18 +7,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "app_role")
-public class AppRole {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SeanceStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    @Column(name ="seance_status_id")
     private Integer id;
-    @Column(name = "name")
-    private String roleName;
-
+    private String statusName;
 }

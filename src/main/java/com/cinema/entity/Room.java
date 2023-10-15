@@ -15,6 +15,7 @@ import lombok.Setter;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "room_id")
     private Integer id;
     @Column(name = "name")
     private String roomName;

@@ -6,18 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Species {
+public class Seance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "specie_id")
+    @Column(name = "Seance_id")
     private Integer id;
-    @Column(name = "name")
-    private String speciesName;
+    private Integer ticketCost;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    @ManyToOne
+    private Room roomId;
+    @ManyToOne
+    private Movie movieId;
 
 }

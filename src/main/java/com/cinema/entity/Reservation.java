@@ -6,23 +6,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Movie {
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "movie_id")
+    @Column(name = "reservation_id")
     private Integer id;
-    private String title;
-    private String description;
-    private Integer yearOfProduction;
+    @Column(name = "user_id")
     @ManyToOne
-    @JoinColumn(name = "species_id")
-    private Species speciesId;
+    private AppUser appUser;
+    @Column(name = "seance_id")
+    @ManyToOne
+    private Seance seance;
+    @Column(name = "status_id")
+    @ManyToOne
+    private SeanceStatus seanceStatus;
 }

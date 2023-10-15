@@ -6,19 +6,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "app_role")
-public class AppRole {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ReservationSeat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
     private Integer id;
-    @Column(name = "name")
-    private String roleName;
 
+    @ManyToOne
+    private Seat seatId;
+    @OneToMany
+    private List<Reservation> reservationId;
 }
