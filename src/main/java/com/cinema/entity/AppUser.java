@@ -23,12 +23,12 @@ public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Integer id;
+    private Integer UserId;
     private String login;
     private String password;
     private String Email;
     @ManyToOne
-    @JoinColumn(name = "app_role_id")
+    @JoinColumn(name = "user_role")
     private AppRole userRole;
 
     @Override

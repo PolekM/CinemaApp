@@ -16,8 +16,9 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_id")
-    private Integer id;
-    @Column(name = "name")
+    private Integer roomId;
+    @Column(name = "room_name")
     private String roomName;
+    @Column(name = "seats_count")
     private Integer seatCount;
 }

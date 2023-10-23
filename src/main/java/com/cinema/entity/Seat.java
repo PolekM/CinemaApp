@@ -15,7 +15,7 @@ public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer SeatId;
     private Integer rowNumber;
     private Integer seatNumber;
     @ManyToOne

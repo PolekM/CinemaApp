@@ -16,7 +16,7 @@ public class Species {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "specie_id")
-    private Integer id;
+    private Integer SpecieId;
     @Column(name = "name")
     private String speciesName;
 

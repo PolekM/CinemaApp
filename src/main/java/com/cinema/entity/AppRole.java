@@ -17,7 +17,7 @@ public class AppRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private Integer id;
+    private Integer roleId;
     @Column(name = "name")
     private String roleName;
 

@@ -17,10 +17,12 @@ public class ReservationSeat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer reservationSeatId;
 
     @ManyToOne
+    @JoinColumn(name = "seat_id")
     private Seat seatId;
-    @OneToMany
-    private List<Reservation> reservationId;
+    @ManyToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservationId;
 }

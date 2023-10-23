@@ -18,14 +18,16 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
-    private Integer id;
-    @Column(name = "user_id")
+    private Integer reservationId;
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private AppUser appUser;
-    @Column(name = "seance_id")
     @ManyToOne
+    @JoinColumn(name = "seance_id")
     private Seance seance;
-    @Column(name = "status_id")
     @ManyToOne
+    @JoinColumn(name = "status_id")
     private SeanceStatus seanceStatus;
+
+
 }

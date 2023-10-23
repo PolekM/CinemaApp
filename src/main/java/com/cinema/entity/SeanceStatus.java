@@ -15,7 +15,7 @@ public class SeanceStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="seance_status_id")
-    private Integer id;
+    @Column(name ="status_id")
+    private Integer StatusId;
     private String statusName;
 }
