@@ -4,6 +4,7 @@ import com.cinema.converter.DtoConverter;
 import com.cinema.dto.MovieDto;
 import com.cinema.entity.Movie;
 import com.cinema.entity.Species;
+import com.cinema.exception.SpeciesNotFoundException;
 import com.cinema.repository.MovieRepository;
 import com.cinema.repository.SpeciesRepository;
 import com.cinema.service.MovieService;
@@ -22,7 +23,7 @@ public class MovieServiceImp implements MovieService {
     private final DtoConverter dtoConverter;
 
     @Autowired
-    public MovieServiceImp(MovieRepository movieRepository, DtoConverter dtoConverter,SpeciesRepository speciesRepository) {
+    public MovieServiceImp(MovieRepository movieRepository, DtoConverter dtoConverter, SpeciesRepository speciesRepository) {
         this.movieRepository = movieRepository;
         this.dtoConverter = dtoConverter;
         this.speciesRepository = speciesRepository;
@@ -35,11 +36,11 @@ public class MovieServiceImp implements MovieService {
 
     @Override
     public MovieDto addNewMovie(MovieDto movieDto) {
-        Species speciesBySpeciesName = speciesRepository.findSpeciesBySpeciesName(movieDto.getSpeciesName());
-        System.out.println(speciesBySpeciesName);
-        if(speciesBySpeciesName==null){
-            throw new IllegalArgumentException("wrong Argument");
-        }
+        Species speciesBySpeciesName =
+                speciesRepository.
+                        findSpeciesBySpeciesName(movieDto.getSpeciesName())
+                        .orElseThrow(() -> new SpeciesNotFoundException("Species doesn't exist"));
+
         Movie convertedMovie = dtoConverter.movieDtoToMovie(movieDto);
         convertedMovie.setSpeciesId(speciesBySpeciesName);
         movieRepository.save(convertedMovie);
