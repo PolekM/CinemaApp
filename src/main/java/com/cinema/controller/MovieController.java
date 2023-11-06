@@ -3,9 +3,8 @@ package com.cinema.controller;
 import com.cinema.dto.MovieDto;
 import com.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +24,10 @@ public class MovieController {
     public List<MovieDto> getAllMovie(){
         return movieService.getAllMovie();
     }
+
+    @PostMapping("/add")
+    public MovieDto addNewMovie(@RequestBody MovieDto movieDto){
+        return movieService.addNewMovie(movieDto);
+    }
+
 }

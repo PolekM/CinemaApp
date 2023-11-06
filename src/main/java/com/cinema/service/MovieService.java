@@ -8,4 +8,6 @@ public interface MovieService {
 
 
     List<MovieDto> getAllMovie();
+
+    MovieDto addNewMovie(MovieDto movieDto);
 }

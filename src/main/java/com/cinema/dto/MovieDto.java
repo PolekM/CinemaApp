@@ -1,5 +1,6 @@
 package com.cinema.dto;
 
+import com.cinema.entity.Species;
 import lombok.Data;
 
 @Data
