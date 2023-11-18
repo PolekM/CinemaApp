@@ -11,7 +11,7 @@ import java.util.Date;
 public class APIExceptionHandler {
 
     @ExceptionHandler(SpeciesNotFoundException.class)
-    public ResponseEntity<Error> handleSpeciesNotFoundException(SpeciesNotFoundException speciesNotFoundException){
+    public ResponseEntity<Error> handleSpeciesNotFoundException(SpeciesNotFoundException speciesNotFoundException) {
 
         Error error = new Error();
 
@@ -19,7 +19,19 @@ public class APIExceptionHandler {
         error.setMassage(speciesNotFoundException.getMessage());
         error.setErrorTime(new Date());
 
-        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 
+    }
+
+    @ExceptionHandler(MovieNotFoundException.class)
+    public ResponseEntity<Error> handleMovieNotFoundException(MovieNotFoundException movieNotFoundException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.NOT_FOUND.value());
+        error.setMassage(movieNotFoundException.getMessage());
+        error.setErrorTime(new Date());
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }

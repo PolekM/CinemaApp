@@ -44,7 +44,7 @@ public class SecurityConfig {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .requestMatchers("/movie").permitAll()
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers("/movie/add","/admin").hasRole("ADMIN")
+                        .requestMatchers("/movie/add","/admin","/movie/update/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions().disable())

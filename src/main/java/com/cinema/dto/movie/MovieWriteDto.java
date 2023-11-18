@@ -1,14 +1,14 @@
-package com.cinema.dto;
+package com.cinema.dto.movie;
 
 import com.cinema.entity.Species;
 import lombok.Data;
 
 @Data
-public class MovieDto {
+public class MovieWriteDto {
 
     private String title;
     private String description;
     private Integer yearOfProduction;
-    private String speciesName;
+    private Species species;
 
 }

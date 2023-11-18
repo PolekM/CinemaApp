@@ -1,9 +1,11 @@
 package com.cinema.controller;
 
-import com.cinema.dto.MovieDto;
+import com.cinema.dto.movie.MovieReadDto;
+import com.cinema.dto.movie.MovieUpdateDto;
+import com.cinema.dto.movie.MovieWriteDto;
 import com.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +23,17 @@ public class MovieController {
 
 
     @GetMapping()
-    public List<MovieDto> getAllMovie(){
+    public List<MovieReadDto> getAllMovie(){
         return movieService.getAllMovie();
     }
 
     @PostMapping("/add")
-    public MovieDto addNewMovie(@RequestBody MovieDto movieDto){
-        return movieService.addNewMovie(movieDto);
+    public ResponseEntity<String> addNewMovie(@RequestBody MovieWriteDto movieWriteDto){
+        return movieService.addNewMovie(movieWriteDto);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateMovie(@RequestBody MovieUpdateDto movieUpdateDto, @PathVariable Integer id){
+        return movieService.updateMovie(movieUpdateDto,id);
+    }
 }
