@@ -43,27 +43,21 @@ public class MovieServiceImp implements MovieService {
 
     @Override
     public ResponseEntity<String> addNewMovie(MovieWriteDto movieWriteDto) {
-        try {
-            speciesRepository.
-                    findById(movieWriteDto.getSpecies().getSpecieId())
-                    .orElseThrow(() -> new SpeciesNotFoundException("Species doesn't exist"));
+        speciesRepository.
+                findById(movieWriteDto.getSpecies().getSpecieId())
+                .orElseThrow(() -> new SpeciesNotFoundException("Species doesn't exist"));
 
-            Movie convertedMovie = dtoConverter.movieWriteDtoToMovie(movieWriteDto);
-            movieRepository.save(convertedMovie);
-            return new ResponseEntity<>("Object added correctly", HttpStatus.OK);
-
-        }
-        catch (Exception e){
-            return new ResponseEntity<>("Error adding movie", HttpStatus.INTERNAL_SERVER_ERROR);
-
-        }
+        Movie convertedMovie = dtoConverter.movieWriteDtoToMovie(movieWriteDto);
+        movieRepository.save(convertedMovie);
+        log.info("Object added correctly");
+        return new ResponseEntity<>("Object added correctly", HttpStatus.OK);
 
     }
 
     @Transactional
     @Override
     public ResponseEntity<String> updateMovie(MovieUpdateDto movieUpdateDto, Integer id) {
-        try {
+
             Movie movie = movieRepository.findById(id).
                     orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
 
@@ -74,9 +68,7 @@ public class MovieServiceImp implements MovieService {
             movieRepository.save(updatedMovie);
             log.info("Object updated correctly");
             return new ResponseEntity<>("Object updated correctly", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error updating movie", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
 
 
     }
