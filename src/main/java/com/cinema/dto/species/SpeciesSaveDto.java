@@ -1,9 +1,9 @@
-package com.cinema.dto;
+package com.cinema.dto.species;
 
 import lombok.Data;
 
 @Data
-public class SpeciesDto {
+public class SpeciesSaveDto {
 
     private String speciesName;
 }
