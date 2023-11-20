@@ -1,4 +1,4 @@
-package com.cinema.exception;
+package com.cinema.exception.movie;
 
 public class MovieNotFoundException extends RuntimeException{
 

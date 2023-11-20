@@ -40,7 +40,7 @@ public class DtoConverter {
      return modelMapper.map(species,SpeciesReadDto.class);
     }
 
-    public Species SpeciesSaveDtoToSpecies(SpeciesReadDto speciesReadDto){
+    public Species SpeciesSaveDtoToSpecies(SpeciesSaveDto speciesReadDto){
         return modelMapper.map(speciesReadDto,Species.class);
     }
 

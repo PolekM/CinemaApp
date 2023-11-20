@@ -1,4 +1,4 @@
-package com.cinema.exception;
+package com.cinema.exception.species;
 
 public class SpeciesNotFoundException extends RuntimeException{
 
