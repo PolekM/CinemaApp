@@ -45,7 +45,7 @@ public class SecurityConfig {
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/species").permitAll()
                         .requestMatchers("/movie").permitAll()
-                        .requestMatchers("species/add").hasRole("ADMIN")
+                        .requestMatchers("species/add","/species/update/**").hasRole("ADMIN")
                         .requestMatchers("/movie/add","/admin","/movie/update/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

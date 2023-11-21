@@ -36,11 +36,11 @@ public class DtoConverter {
         return mappedMovie;
     }
 
-    public SpeciesReadDto SpeciesToSpeciesReadDto(Species species){
+    public SpeciesReadDto speciesToSpeciesReadDto(Species species){
      return modelMapper.map(species,SpeciesReadDto.class);
     }
 
-    public Species SpeciesSaveDtoToSpecies(SpeciesSaveDto speciesReadDto){
+    public Species speciesSaveDtoToSpecies(SpeciesSaveDto speciesReadDto){
         return modelMapper.map(speciesReadDto,Species.class);
     }
 

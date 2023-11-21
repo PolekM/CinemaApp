@@ -12,4 +12,6 @@ public interface SpeciesService {
     List<SpeciesReadDto> getAllSpecies();
 
     ResponseEntity<String> addNewSpecies(SpeciesSaveDto speciesSaveDto);
+
+    ResponseEntity<String> updateSpecies(SpeciesSaveDto speciesSaveDto, Integer id);
 }

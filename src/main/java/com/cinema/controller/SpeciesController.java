@@ -30,4 +30,9 @@ public class SpeciesController {
     public ResponseEntity<String> addNewSpecies(@RequestBody SpeciesSaveDto speciesSaveDto){
         return speciesService.addNewSpecies(speciesSaveDto);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateSpecies(@RequestBody SpeciesSaveDto speciesSaveDto,@PathVariable Integer id){
+        return speciesService.updateSpecies(speciesSaveDto,id);
+    }
 }
