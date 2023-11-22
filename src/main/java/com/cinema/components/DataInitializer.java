@@ -1,19 +1,16 @@
 package com.cinema.components;
 
-import com.cinema.entity.AppRole;
-import com.cinema.entity.AppUser;
-import com.cinema.entity.Movie;
-import com.cinema.entity.Species;
-import com.cinema.repository.AppRoleRepository;
-import com.cinema.repository.AppUserRepository;
-import com.cinema.repository.MovieRepository;
-import com.cinema.repository.SpeciesRepository;
+import com.cinema.converter.DtoConverter;
+import com.cinema.dto.seat.SeatSaveDto;
+import com.cinema.entity.*;
+import com.cinema.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -25,12 +22,27 @@ public class DataInitializer implements CommandLineRunner {
 
     private final SpeciesRepository speciesRepository;
 
+    private final RoomRepository roomRepository;
+
+    private final SeatRepository seatRepository;
+    private final DtoConverter dtoConverter;
+
     @Autowired
-    public DataInitializer(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository, MovieRepository movieRepository, SpeciesRepository speciesRepository) {
+    public DataInitializer(AppUserRepository appUserRepository,
+                           AppRoleRepository appRoleRepository,
+                           MovieRepository movieRepository,
+                           SpeciesRepository speciesRepository,
+                           RoomRepository roomRepository,
+                           SeatRepository seatRepository,
+                           DtoConverter dtoConverter) {
+
         this.appUserRepository = appUserRepository;
         this.appRoleRepository = appRoleRepository;
         this.movieRepository = movieRepository;
         this.speciesRepository = speciesRepository;
+        this.roomRepository = roomRepository;
+        this.seatRepository = seatRepository;
+        this.dtoConverter = dtoConverter;
     }
 
 
@@ -41,6 +53,8 @@ public class DataInitializer implements CommandLineRunner {
         appUserRepository.saveAll(initAppUserTable());
         speciesRepository.saveAll(initSpeciesTable());
         movieRepository.saveAll(initMovieTable());
+        roomRepository.saveAll(initRoomTable());
+        seatRepository.saveAll(initSeatTable());
 
 
     }
@@ -97,6 +111,27 @@ public class DataInitializer implements CommandLineRunner {
         ));
 
         return movieList;
+    }
+
+    public List<Room> initRoomTable() {
+        List<Room> roomList = new ArrayList<>();
+        roomList.add(new Room(1, "A", 20));
+        roomList.add(new Room(2, "B", 20));
+        roomList.add(new Room(3, "C", 20));
+
+        return roomList;
+    }
+    public List<Seat> initSeatTable(){
+        List<SeatSaveDto> seatSaveDto = new ArrayList<>();
+        for(int i=1;i<6;i++){
+            for(int j=1;j<5;j++){
+                seatSaveDto.add(new SeatSaveDto(i,j,1));
+                seatSaveDto.add(new SeatSaveDto(i,j,2));
+                seatSaveDto.add(new SeatSaveDto(i,j,3));
+            }
+        }
+
+        return seatSaveDto.stream().map(dtoConverter::seatSaveDtoToSeat).collect(Collectors.toList());
     }
 }
 

@@ -1,11 +1,13 @@
 package com.cinema.converter;
 
+import com.cinema.dto.seat.SeatSaveDto;
 import com.cinema.dto.species.SpeciesReadDto;
 import com.cinema.dto.species.SpeciesSaveDto;
 import com.cinema.dto.movie.MovieReadDto;
 import com.cinema.dto.movie.MovieUpdateDto;
 import com.cinema.dto.movie.MovieWriteDto;
 import com.cinema.entity.Movie;
+import com.cinema.entity.Seat;
 import com.cinema.entity.Species;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,9 @@ public class DtoConverter {
 
     public Species speciesSaveDtoToSpecies(SpeciesSaveDto speciesReadDto){
         return modelMapper.map(speciesReadDto,Species.class);
+    }
+    public Seat seatSaveDtoToSeat(SeatSaveDto seatSaveDto){
+        return modelMapper.map(seatSaveDto,Seat.class);
     }
 
 }
