@@ -1,6 +1,5 @@
 package com.cinema.components;
 
-import com.cinema.converter.DtoConverter;
 import com.cinema.dto.seat.SeatSaveDto;
 import com.cinema.entity.*;
 import com.cinema.repository.*;
@@ -25,7 +24,6 @@ public class DataInitializer implements CommandLineRunner {
     private final RoomRepository roomRepository;
 
     private final SeatRepository seatRepository;
-    private final DtoConverter dtoConverter;
 
     @Autowired
     public DataInitializer(AppUserRepository appUserRepository,
@@ -33,8 +31,7 @@ public class DataInitializer implements CommandLineRunner {
                            MovieRepository movieRepository,
                            SpeciesRepository speciesRepository,
                            RoomRepository roomRepository,
-                           SeatRepository seatRepository,
-                           DtoConverter dtoConverter) {
+                           SeatRepository seatRepository) {
 
         this.appUserRepository = appUserRepository;
         this.appRoleRepository = appRoleRepository;
@@ -42,7 +39,6 @@ public class DataInitializer implements CommandLineRunner {
         this.speciesRepository = speciesRepository;
         this.roomRepository = roomRepository;
         this.seatRepository = seatRepository;
-        this.dtoConverter = dtoConverter;
     }
 
 
@@ -121,17 +117,18 @@ public class DataInitializer implements CommandLineRunner {
 
         return roomList;
     }
-    public List<Seat> initSeatTable(){
-        List<SeatSaveDto> seatSaveDto = new ArrayList<>();
-        for(int i=1;i<6;i++){
-            for(int j=1;j<5;j++){
-                seatSaveDto.add(new SeatSaveDto(i,j,1));
-                seatSaveDto.add(new SeatSaveDto(i,j,2));
-                seatSaveDto.add(new SeatSaveDto(i,j,3));
+
+    public List<Seat> initSeatTable() {
+        List<SeatSaveDto> seatSaveDtoList = new ArrayList<>();
+        for (int i = 1; i < 6; i++) {
+            for (int j = 1; j < 5; j++) {
+                seatSaveDtoList.add(new SeatSaveDto(i, j, 1));
+                seatSaveDtoList.add(new SeatSaveDto(i, j, 2));
+                seatSaveDtoList.add(new SeatSaveDto(i, j, 3));
             }
         }
 
-        return seatSaveDto.stream().map(dtoConverter::seatSaveDtoToSeat).collect(Collectors.toList());
+        return seatSaveDtoList.stream().map(seatSaveDto -> new Seat(seatSaveDto, roomRepository.findById(seatSaveDto.getRoomId()).get())).collect(Collectors.toList());
     }
 }
 

@@ -1,6 +1,5 @@
 package com.cinema.service.imp;
 
-import com.cinema.converter.DtoConverter;
 import com.cinema.dto.species.SpeciesReadDto;
 import com.cinema.dto.species.SpeciesSaveDto;
 import com.cinema.entity.Species;
@@ -20,16 +19,14 @@ import java.util.stream.Collectors;
 public class SpeciesServiceImp implements SpeciesService {
 
     private final SpeciesRepository speciesRepository;
-    private final DtoConverter dtoConverter;
 
-    public SpeciesServiceImp(SpeciesRepository speciesRepository, DtoConverter dtoConverter) {
+    public SpeciesServiceImp(SpeciesRepository speciesRepository) {
         this.speciesRepository = speciesRepository;
-        this.dtoConverter = dtoConverter;
     }
 
     @Override
     public List<SpeciesReadDto> getAllSpecies() {
-        return speciesRepository.findAll().stream().map(dtoConverter::speciesToSpeciesReadDto).collect(Collectors.toList());
+        return speciesRepository.findAll().stream().map(SpeciesReadDto::new).collect(Collectors.toList());
     }
 
     @Override
@@ -38,7 +35,7 @@ public class SpeciesServiceImp implements SpeciesService {
         if(speciesBySpeciesName.isPresent()){
             throw new SpeciesDuplicateException("The object is already in the database");
         }
-        speciesRepository.save(dtoConverter.speciesSaveDtoToSpecies(speciesSaveDto));
+        speciesRepository.save(new Species(speciesSaveDto));
         return new ResponseEntity<>("Object added correctly", HttpStatus.OK);
     }
 

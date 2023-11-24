@@ -21,4 +21,5 @@ public class Room {
     private String roomName;
     @Column(name = "seats_count")
     private Integer seatCount;
+
 }

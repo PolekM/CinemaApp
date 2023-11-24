@@ -1,10 +1,10 @@
 package com.cinema.service.imp;
 
-import com.cinema.converter.DtoConverter;
 import com.cinema.dto.movie.MovieReadDto;
 import com.cinema.dto.movie.MovieUpdateDto;
-import com.cinema.dto.movie.MovieWriteDto;
+import com.cinema.dto.movie.MovieSaveDto;
 import com.cinema.entity.Movie;
+import com.cinema.entity.Species;
 import com.cinema.exception.movie.MovieNotFoundException;
 import com.cinema.exception.species.SpeciesNotFoundException;
 import com.cinema.repository.MovieRepository;
@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,28 +26,26 @@ public class MovieServiceImp implements MovieService {
 
     private final MovieRepository movieRepository;
     private final SpeciesRepository speciesRepository;
-    private final DtoConverter dtoConverter;
 
     @Autowired
-    public MovieServiceImp(MovieRepository movieRepository, DtoConverter dtoConverter, SpeciesRepository speciesRepository) {
+    public MovieServiceImp(MovieRepository movieRepository, SpeciesRepository speciesRepository) {
         this.movieRepository = movieRepository;
-        this.dtoConverter = dtoConverter;
         this.speciesRepository = speciesRepository;
     }
 
     @Override
     public List<MovieReadDto> getAllMovie() {
-        return movieRepository.findAll().stream().map(dtoConverter::movieToMovieReadDto).collect(Collectors.toList());
+        return movieRepository.findAll().stream().map(MovieReadDto::new).collect(Collectors.toList());
     }
 
     @Override
-    public ResponseEntity<String> addNewMovie(MovieWriteDto movieWriteDto) {
-        speciesRepository.
-                findById(movieWriteDto.getSpecies().getSpecieId())
+    public ResponseEntity<String> addNewMovie(MovieSaveDto movieSaveDto) {
+        Species species = speciesRepository.
+                findById(movieSaveDto.getSpeciesId())
                 .orElseThrow(() -> new SpeciesNotFoundException("Species doesn't exist"));
 
-        Movie convertedMovie = dtoConverter.movieWriteDtoToMovie(movieWriteDto);
-        movieRepository.save(convertedMovie);
+        Movie movie = new Movie(movieSaveDto, species);
+        movieRepository.save(movie);
         log.info("Object added correctly");
         return new ResponseEntity<>("Object added correctly", HttpStatus.OK);
 
@@ -58,17 +55,20 @@ public class MovieServiceImp implements MovieService {
     @Override
     public ResponseEntity<String> updateMovie(MovieUpdateDto movieUpdateDto, Integer id) {
 
-            Movie movie = movieRepository.findById(id).
-                    orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
+        Movie movie = movieRepository.findById(id)
+                        .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
 
-            speciesRepository.
-                    findById(movieUpdateDto.getSpecies().getSpecieId())
-                    .orElseThrow(() -> new SpeciesNotFoundException("Species doesn't exist"));
-            Movie updatedMovie = dtoConverter.movieUpdateDtoToMovie(id, movieUpdateDto, movie);
-            movieRepository.save(updatedMovie);
-            log.info("Object updated correctly");
-            return new ResponseEntity<>("Object updated correctly", HttpStatus.OK);
-
+        Species species = speciesRepository.
+                findById(movieUpdateDto.getSpeciesId())
+                .orElseThrow(() -> new SpeciesNotFoundException("Species doesn't exist"));
+        //TODO change that ugly sets
+        movie.setTitle(movieUpdateDto.getTitle());
+        movie.setDescription(movieUpdateDto.getDescription());
+        movie.setYearOfProduction(movieUpdateDto.getYearOfProduction());
+        movie.setSpecies(species);
+        movieRepository.save(movie);
+        log.info("Object updated correctly");
+        return new ResponseEntity<>("Object updated correctly", HttpStatus.OK);
 
 
     }

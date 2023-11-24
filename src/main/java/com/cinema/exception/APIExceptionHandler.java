@@ -1,6 +1,7 @@
 package com.cinema.exception;
 
 import com.cinema.exception.movie.MovieNotFoundException;
+import com.cinema.exception.room.RoomNotFoundException;
 import com.cinema.exception.species.SpeciesDuplicateException;
 import com.cinema.exception.species.SpeciesNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -27,7 +28,7 @@ public class APIExceptionHandler {
 
     }
 
-    @ExceptionHandler(MovieNotFoundException.class)
+    @ExceptionHandler({MovieNotFoundException.class})
     public ResponseEntity<Error> handleMovieNotFoundException(MovieNotFoundException movieNotFoundException) {
 
         Error error = new Error();
@@ -46,6 +47,17 @@ public class APIExceptionHandler {
 
         error.setCode(HttpStatus.CONFLICT.value());
         error.setMassage(speciesDuplicateException.getMessage());
+        error.setErrorTime(new Date());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(RoomNotFoundException.class)
+    public ResponseEntity<Error> handleRoomNotFoundException(RoomNotFoundException roomNotFoundException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.CONFLICT.value());
+        error.setMassage(roomNotFoundException.getMessage());
         error.setErrorTime(new Date());
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }

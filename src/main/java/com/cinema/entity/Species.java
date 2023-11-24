@@ -1,5 +1,6 @@
 package com.cinema.entity;
 
+import com.cinema.dto.species.SpeciesSaveDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,4 +21,7 @@ public class Species {
     @Column(name = "name")
     private String speciesName;
 
+    public Species(SpeciesSaveDto speciesSaveDto){
+        this.speciesName = speciesSaveDto.getSpeciesName();
+    }
 }

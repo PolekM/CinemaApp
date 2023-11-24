@@ -9,5 +9,5 @@ public class MovieUpdateDto {
     private String title;
     private String description;
     private Integer yearOfProduction;
-    private Species species;
+    private Integer speciesId;
 }

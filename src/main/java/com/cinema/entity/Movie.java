@@ -1,12 +1,11 @@
 package com.cinema.entity;
 
+import com.cinema.dto.movie.MovieSaveDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -24,5 +23,12 @@ public class Movie {
     private Integer yearOfProduction;
     @ManyToOne
     @JoinColumn(name = "species_id")
-    private Species speciesId;
+    private Species species;
+
+    public Movie(MovieSaveDto movieSaveDto, Species species){
+        this.title = movieSaveDto.getTitle();
+        this.description = movieSaveDto.getDescription();
+        this.yearOfProduction = movieSaveDto.getYearOfProduction();
+        this.species = species;
+    }
 }

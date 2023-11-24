@@ -1,5 +1,6 @@
 package com.cinema.entity;
 
+import com.cinema.dto.seat.SeatSaveDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,11 @@ public class Seat {
     private Integer seatNumber;
     @ManyToOne
     @JoinColumn(name = "room_id")
-    private Room roomId;
+    private Room room;
 
+    public Seat(SeatSaveDto seatSaveDto, Room room) {
+        this.rowNumber = seatSaveDto.getRowNumber();
+        this.seatNumber = seatSaveDto.getSeatNumber();
+        this.room = room;
+    }
 }

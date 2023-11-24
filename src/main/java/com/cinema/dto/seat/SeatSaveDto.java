@@ -10,4 +10,6 @@ public class SeatSaveDto {
     private Integer rowNumber;
     private Integer seatNumber;
     private Integer roomId;
+
+
 }

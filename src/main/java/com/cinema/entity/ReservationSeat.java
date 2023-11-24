@@ -21,8 +21,8 @@ public class ReservationSeat {
 
     @ManyToOne
     @JoinColumn(name = "seat_id")
-    private Seat seatId;
+    private Seat seat;
     @ManyToOne
     @JoinColumn(name = "reservation_id")
-    private Reservation reservationId;
+    private Reservation reservation;
 }
