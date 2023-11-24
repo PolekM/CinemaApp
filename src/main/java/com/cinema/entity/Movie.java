@@ -1,6 +1,7 @@
 package com.cinema.entity;
 
 import com.cinema.dto.movie.MovieSaveDto;
+import com.cinema.dto.movie.MovieUpdateDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,5 +31,14 @@ public class Movie {
         this.description = movieSaveDto.getDescription();
         this.yearOfProduction = movieSaveDto.getYearOfProduction();
         this.species = species;
+    }
+
+    public Movie UpdateMovie(MovieUpdateDto movieUpdateDto,Species species){
+        this.title = movieUpdateDto.getTitle();
+        this.description = movieUpdateDto.getDescription();
+        this.yearOfProduction =movieUpdateDto.getYearOfProduction();
+        this.species = species;
+
+        return this;
     }
 }
