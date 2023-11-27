@@ -2,6 +2,7 @@ package com.cinema.exception;
 
 import com.cinema.exception.movie.MovieNotFoundException;
 import com.cinema.exception.room.RoomNotFoundException;
+import com.cinema.exception.seance.SeanceNotFoundException;
 import com.cinema.exception.species.SpeciesDuplicateException;
 import com.cinema.exception.species.SpeciesNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,6 +16,7 @@ import java.util.Date;
 @ControllerAdvice
 public class APIExceptionHandler {
 
+    //TODO - minimize code duplication
     @ExceptionHandler(SpeciesNotFoundException.class)
     public ResponseEntity<Error> handleSpeciesNotFoundException(SpeciesNotFoundException speciesNotFoundException) {
 
@@ -56,9 +58,20 @@ public class APIExceptionHandler {
 
         Error error = new Error();
 
-        error.setCode(HttpStatus.CONFLICT.value());
+        error.setCode(HttpStatus.NOT_FOUND.value());
         error.setMassage(roomNotFoundException.getMessage());
         error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SeanceNotFoundException.class)
+    public ResponseEntity<Error> handleSeanceNotFoundException(SeanceNotFoundException seanceNotFoundException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.NOT_FOUND.value());
+        error.setMassage(seanceNotFoundException.getMessage());
+        error.setErrorTime(new Date());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }

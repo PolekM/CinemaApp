@@ -5,6 +5,7 @@ import com.cinema.dto.seance.SeanceSaveDto;
 import com.cinema.service.SeanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public class SeanceController {
     @PostMapping("/add")
     public ResponseEntity<String> addNewSeance(@RequestBody SeanceSaveDto seanceSaveDto) {
         return seanceService.addNewSeance(seanceSaveDto);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateSeance(@RequestBody SeanceSaveDto seanceSaveDto, @PathVariable Integer id){
+        return seanceService.updateSeance(seanceSaveDto,id);
     }
 }
 

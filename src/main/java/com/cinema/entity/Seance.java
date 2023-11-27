@@ -28,15 +28,25 @@ public class Seance {
     @JoinColumn(name = "room_id")
     private Room room;
     @ManyToOne
-    @JoinColumn(name="movie_id")
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
 
-    public Seance(SeanceSaveDto seanceSaveDto,Movie movie,Room room) {
+    public Seance(SeanceSaveDto seanceSaveDto, Movie movie, Room room) {
         this.ticketCost = seanceSaveDto.getTicketCost();
         this.startTime = seanceSaveDto.getStartTime();
         this.endTime = seanceSaveDto.getEndTime();
         this.room = room;
         this.movie = movie;
+    }
+
+    public Seance updateSeance(SeanceSaveDto seanceSaveDto, Movie movie, Room room) {
+        this.ticketCost = seanceSaveDto.getTicketCost();
+        this.startTime = seanceSaveDto.getStartTime();
+        this.endTime = seanceSaveDto.getEndTime();
+        this.room = room;
+        this.movie = movie;
+
+        return this;
     }
 }

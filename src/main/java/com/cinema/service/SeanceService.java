@@ -10,4 +10,6 @@ public interface SeanceService {
     ResponseEntity<String> addNewSeance(SeanceSaveDto seanceSaveDto);
 
     List<SeanceReadDto> getAllSeance();
+
+    ResponseEntity<String> updateSeance(SeanceSaveDto seanceSaveDto, Integer id);
 }
