@@ -1,12 +1,15 @@
 package com.cinema.components;
 
+import com.cinema.dto.seance.SeanceSaveDto;
 import com.cinema.dto.seat.SeatSaveDto;
 import com.cinema.entity.*;
 import com.cinema.repository.*;
+import com.cinema.service.SeanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,13 +28,16 @@ public class DataInitializer implements CommandLineRunner {
 
     private final SeatRepository seatRepository;
 
+    private final SeanceRepository seanceRepository;
+
     @Autowired
     public DataInitializer(AppUserRepository appUserRepository,
                            AppRoleRepository appRoleRepository,
                            MovieRepository movieRepository,
                            SpeciesRepository speciesRepository,
                            RoomRepository roomRepository,
-                           SeatRepository seatRepository) {
+                           SeatRepository seatRepository,
+                           SeanceRepository seanceRepository) {
 
         this.appUserRepository = appUserRepository;
         this.appRoleRepository = appRoleRepository;
@@ -39,6 +45,7 @@ public class DataInitializer implements CommandLineRunner {
         this.speciesRepository = speciesRepository;
         this.roomRepository = roomRepository;
         this.seatRepository = seatRepository;
+        this.seanceRepository = seanceRepository;
     }
 
 
@@ -51,6 +58,7 @@ public class DataInitializer implements CommandLineRunner {
         movieRepository.saveAll(initMovieTable());
         roomRepository.saveAll(initRoomTable());
         seatRepository.saveAll(initSeatTable());
+        seanceRepository.saveAll(initSeanceTable());
 
 
     }
@@ -129,6 +137,23 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         return seatSaveDtoList.stream().map(seatSaveDto -> new Seat(seatSaveDto, roomRepository.findById(seatSaveDto.getRoomId()).get())).collect(Collectors.toList());
+    }
+
+    public List<Seance> initSeanceTable() {
+        List<SeanceSaveDto> seanceSaveDto = new ArrayList<>();
+        seanceSaveDto.add(new SeanceSaveDto(
+                20,
+                LocalDateTime.of(2023, 11, 29, 14, 0),
+                LocalDateTime.of(2023, 11, 29, 14, 0),
+                1,
+                1));
+        seanceSaveDto.add(new SeanceSaveDto(
+                20,
+                LocalDateTime.of(2023, 11, 29, 16, 0),
+                LocalDateTime.of(2023, 11, 29, 17, 0),
+                2,
+                2));
+        return seanceSaveDto.stream().map(seanceDto -> new Seance(seanceDto,movieRepository.findById(seanceDto.getMovieId()).get(),roomRepository.findById(seanceDto.getRoomId()).get())).collect(Collectors.toList());
     }
 }
 
