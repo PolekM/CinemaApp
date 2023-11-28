@@ -42,7 +42,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                        .requestMatchers("/login","/species","/seance","/movie").permitAll()
+                        .requestMatchers("/login","/species","/seance","/movie","/register").permitAll()
                         .requestMatchers("species/add","/species/update/**").hasRole("ADMIN")
                         .requestMatchers("/movie/add","/admin","/movie/update/**").hasRole("ADMIN")
                         .requestMatchers("/seance/add","/seance/update/**").hasRole("ADMIN")

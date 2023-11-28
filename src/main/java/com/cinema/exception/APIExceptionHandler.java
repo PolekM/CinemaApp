@@ -1,5 +1,7 @@
 package com.cinema.exception;
 
+import com.cinema.exception.auth.UserDuplicateException;
+import com.cinema.exception.auth.WrongPasswordException;
 import com.cinema.exception.movie.MovieNotFoundException;
 import com.cinema.exception.room.RoomNotFoundException;
 import com.cinema.exception.seance.SeanceNotFoundException;
@@ -74,4 +76,27 @@ public class APIExceptionHandler {
         error.setErrorTime(new Date());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(UserDuplicateException.class)
+    public ResponseEntity<Error> handleUserDuplicateException(UserDuplicateException userDuplicateException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.CONFLICT.value());
+        error.setMassage(userDuplicateException.getMessage());
+        error.setErrorTime(new Date());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(WrongPasswordException.class)
+    public ResponseEntity<Error> handleSeanceNotFoundException(WrongPasswordException wrongPasswordException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.BAD_REQUEST.value());
+        error.setMassage(wrongPasswordException.getMessage());
+        error.setErrorTime(new Date());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
 }

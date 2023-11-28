@@ -1,6 +1,8 @@
 package com.cinema.entity;
 
+import com.cinema.dto.auth.AuthSaveDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,10 +28,17 @@ public class AppUser implements UserDetails {
     private Integer UserId;
     private String login;
     private String password;
-    private String Email;
+    private String email;
     @ManyToOne
     @JoinColumn(name = "user_role")
     private AppRole userRole;
+
+    public AppUser(AuthSaveDto authSaveDto){
+        this.login =authSaveDto.getLogin().toLowerCase();
+        this.password = authSaveDto.getPassword();
+        this.email = authSaveDto.getEmail();
+        this.userRole = new AppRole(2,"ROLE_USER");
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
