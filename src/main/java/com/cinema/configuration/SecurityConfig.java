@@ -45,7 +45,7 @@ public class SecurityConfig {
                         .requestMatchers("/login","/species","/seance","/movie").permitAll()
                         .requestMatchers("species/add","/species/update/**").hasRole("ADMIN")
                         .requestMatchers("/movie/add","/admin","/movie/update/**").hasRole("ADMIN")
-                        .requestMatchers("/seance/add").hasRole("ADMIN")
+                        .requestMatchers("/seance/add","/seance/update/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions().disable())
