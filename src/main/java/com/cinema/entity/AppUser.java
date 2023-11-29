@@ -1,6 +1,7 @@
 package com.cinema.entity;
 
 import com.cinema.dto.auth.AuthSaveDto;
+import com.cinema.dto.auth.ChangePasswordDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,11 @@ public class AppUser implements UserDetails {
         this.password = authSaveDto.getPassword();
         this.email = authSaveDto.getEmail();
         this.userRole = new AppRole(2,"ROLE_USER");
+    }
+
+    public AppUser updateUserPassword(String updatedPassword){
+        this.password = updatedPassword;
+        return this;
     }
 
     @Override
