@@ -1,5 +1,6 @@
 package com.cinema.entity;
 
+import com.cinema.dto.reservationStatus.ReservationStatusSaveDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +19,8 @@ public class ReservationStatus {
     @Column(name ="reservation_id")
     private Integer reservationId;
     private String statusName;
+
+    public ReservationStatus(ReservationStatusSaveDto reservationStatusSaveDto){
+        this.statusName = reservationStatusSaveDto.getStatusName();
+    }
 }

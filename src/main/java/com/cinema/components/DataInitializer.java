@@ -1,10 +1,10 @@
 package com.cinema.components;
 
+import com.cinema.dto.reservationStatus.ReservationStatusSaveDto;
 import com.cinema.dto.seance.SeanceSaveDto;
 import com.cinema.dto.seat.SeatSaveDto;
 import com.cinema.entity.*;
 import com.cinema.repository.*;
-import com.cinema.service.SeanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -29,15 +29,18 @@ public class DataInitializer implements CommandLineRunner {
     private final SeatRepository seatRepository;
 
     private final SeanceRepository seanceRepository;
+    private final ReservationStatusRepository reservationStatusRepository;
 
     @Autowired
+
     public DataInitializer(AppUserRepository appUserRepository,
                            AppRoleRepository appRoleRepository,
                            MovieRepository movieRepository,
                            SpeciesRepository speciesRepository,
                            RoomRepository roomRepository,
                            SeatRepository seatRepository,
-                           SeanceRepository seanceRepository) {
+                           SeanceRepository seanceRepository,
+                           ReservationStatusRepository reservationStatusRepository) {
 
         this.appUserRepository = appUserRepository;
         this.appRoleRepository = appRoleRepository;
@@ -46,6 +49,7 @@ public class DataInitializer implements CommandLineRunner {
         this.roomRepository = roomRepository;
         this.seatRepository = seatRepository;
         this.seanceRepository = seanceRepository;
+        this.reservationStatusRepository = reservationStatusRepository;
     }
 
 
@@ -59,6 +63,7 @@ public class DataInitializer implements CommandLineRunner {
         roomRepository.saveAll(initRoomTable());
         seatRepository.saveAll(initSeatTable());
         seanceRepository.saveAll(initSeanceTable());
+        reservationStatusRepository.saveAll(initReservationStatusRepository());
 
 
     }
@@ -153,7 +158,15 @@ public class DataInitializer implements CommandLineRunner {
                 LocalDateTime.of(2023, 11, 29, 17, 0),
                 2,
                 2));
-        return seanceSaveDto.stream().map(seanceDto -> new Seance(seanceDto,movieRepository.findById(seanceDto.getMovieId()).get(),roomRepository.findById(seanceDto.getRoomId()).get())).collect(Collectors.toList());
+        return seanceSaveDto.stream().map(seanceDto -> new Seance(seanceDto, movieRepository.findById(seanceDto.getMovieId()).get(), roomRepository.findById(seanceDto.getRoomId()).get())).collect(Collectors.toList());
+    }
+
+    public List<ReservationStatus> initReservationStatusRepository() {
+        List<ReservationStatusSaveDto> reservationStatusSaveDtoList = new ArrayList<>();
+        reservationStatusSaveDtoList.add(new ReservationStatusSaveDto("UnPaid"));
+        reservationStatusSaveDtoList.add(new ReservationStatusSaveDto("Paid"));
+        reservationStatusSaveDtoList.add(new ReservationStatusSaveDto("Canceled"));
+        return reservationStatusSaveDtoList.stream().map(ReservationStatus::new).collect(Collectors.toList());
     }
 }
 
