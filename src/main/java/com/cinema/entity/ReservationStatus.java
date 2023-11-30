@@ -11,11 +11,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeanceStatus {
+public class ReservationStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="status_id")
-    private Integer StatusId;
+    @Column(name ="reservation_id")
+    private Integer reservationId;
     private String statusName;
 }

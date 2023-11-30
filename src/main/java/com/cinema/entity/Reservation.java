@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -26,8 +24,8 @@ public class Reservation {
     @JoinColumn(name = "seance_id")
     private Seance seance;
     @ManyToOne
-    @JoinColumn(name = "status_id")
-    private SeanceStatus seanceStatus;
+    @JoinColumn(name = "reservation_id")
+    private ReservationStatus reservationStatus;
 
 
 }
