@@ -52,20 +52,21 @@ Table species {
 }
 
 Table reservation_seat {
-  reservationSeatId integer [primary key]
+  reservation_seat_id integer [primary key]
   seat_id integer
   reservation_id integer
 
 }
 Table reservation {
   reservation_id integer [primary key]
+  price integer
   user_id integer
-  seans_id integer
-  status_id varchar
+  seance_id integer
+  reservation_status_id integer
 }
 
-Table Seance_Status {
-  status_id integer [primary key]
+Table Reservation_Status {
+  reservation_status_id integer [primary key]
   status_name varchar
 }
 
@@ -81,12 +82,12 @@ Ref: "species"."species_id" < "movies"."species_id"
 
 Ref: "movies"."movie_id" < "seance"."movie_id"
 
-Ref: "seance"."seance_id" < "reservation"."seans_id"
+Ref: "seance"."seance_id" < "reservation"."seance_id"
 
 Ref: "app_users"."user_id" < "reservation"."user_id"
-
-Ref: "Seance_Status"."status_id" < "reservation"."status_id"
 
 Ref: "reservation_seat"."reservation_id" > "reservation"."reservation_id"
 
 Ref: "reservation_seat"."seat_id" > "seats"."seat_id"
+
+Ref: "Reservation_Status"."reservation_status_id" < "reservation"."reservation_status_id"

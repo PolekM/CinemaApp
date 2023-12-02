@@ -17,6 +17,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
     private Integer reservationId;
+    private Integer price;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser appUser;
