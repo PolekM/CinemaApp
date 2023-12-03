@@ -1,5 +1,6 @@
 package com.cinema.entity;
 
+import com.cinema.dto.reservation.BookingSaveDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +29,11 @@ public class Reservation {
     @JoinColumn(name = "reservation_status_id")
     private ReservationStatus reservationStatus;
 
+    public Reservation(AppUser user,Seance seance, BookingSaveDto bookingSaveDto, ReservationStatus reservationStatus){
+        this.price = bookingSaveDto.getSeats().size()* seance.getTicketCost();
+        this.appUser = user;
+        this.seance = seance;
+        this.reservationStatus = reservationStatus;
+    }
 
 }

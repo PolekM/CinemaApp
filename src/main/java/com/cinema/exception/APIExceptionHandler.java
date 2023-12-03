@@ -3,8 +3,10 @@ package com.cinema.exception;
 import com.cinema.exception.auth.UserDuplicateException;
 import com.cinema.exception.auth.WrongPasswordException;
 import com.cinema.exception.movie.MovieNotFoundException;
+import com.cinema.exception.reservationStatus.ReservationStatusNotFoundException;
 import com.cinema.exception.room.RoomNotFoundException;
 import com.cinema.exception.seance.SeanceNotFoundException;
+import com.cinema.exception.seat.SeatNotFoundException;
 import com.cinema.exception.species.SpeciesDuplicateException;
 import com.cinema.exception.species.SpeciesNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -97,6 +99,26 @@ public class APIExceptionHandler {
         error.setMassage(wrongPasswordException.getMessage());
         error.setErrorTime(new Date());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ReservationStatusNotFoundException.class)
+    public ResponseEntity<Error> handleReservationStatusNotFoundException(ReservationStatusNotFoundException reservationStatusNotFoundException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.NOT_FOUND.value());
+        error.setMassage(reservationStatusNotFoundException.getMessage());
+        error.setErrorTime(new Date());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(SeatNotFoundException.class)
+    public ResponseEntity<Error> handleReservationStatusNotFoundException(SeatNotFoundException seatNotFoundException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.NOT_FOUND.value());
+        error.setMassage(seatNotFoundException.getMessage());
+        error.setErrorTime(new Date());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
 }

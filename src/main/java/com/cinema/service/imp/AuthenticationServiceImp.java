@@ -16,12 +16,12 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImp implements AuthenticationService {
 
     private final AppUserRepository appUserRepository;
-    private final PasswordEncoder passswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthenticationServiceImp(AppUserRepository appUserRepository, PasswordEncoder passswordEncoder) {
+    public AuthenticationServiceImp(AppUserRepository appUserRepository, PasswordEncoder passwordEncoder) {
         this.appUserRepository = appUserRepository;
-        this.passswordEncoder = passswordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
         if(!authSaveDto.getPassword().equals(authSaveDto.getRepeatPassword())){
             throw new WrongPasswordException("Password aren`t the same");
         }
-        authSaveDto.setPassword(passswordEncoder.encode(authSaveDto.getPassword()));
+        authSaveDto.setPassword(passwordEncoder.encode(authSaveDto.getPassword()));
         AppUser newUser = new AppUser(authSaveDto);
         appUserRepository.save(newUser);
 
