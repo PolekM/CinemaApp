@@ -2,6 +2,7 @@ package com.cinema.service.imp;
 
 import com.cinema.dto.reservation.BookingReadDto;
 import com.cinema.dto.reservation.BookingSaveDto;
+import com.cinema.dto.reservation.ReservationUserDto;
 import com.cinema.dto.seat.SeatBookingReadDto;
 import com.cinema.entity.*;
 import com.cinema.exception.reservationStatus.ReservationStatusNotFoundException;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,7 +49,7 @@ public class ReservationServiceImp implements ReservationService {
 
     @Override
     public BookingReadDto getBookingData(Integer id) {
-        Seance seance = seanceRepository.findById(id).orElseThrow(() -> new SeanceNotFoundException("Seance doesn't exist"));
+        Seance seance = getSeance(id);
         List<SeatBookingReadDto> allSeatsInRoom = seatRepository.findAllSeatsBySeanceId(seance.getSeanceId())
                 .stream().map(SeatBookingReadDto::new).collect(Collectors.toList());
         List<SeatBookingReadDto> allReservedSeatsInRoom = seatRepository.findAllReservedSeatsBySeanceId(seance.getSeanceId())
@@ -59,20 +61,46 @@ public class ReservationServiceImp implements ReservationService {
     @Override
     @Transactional
     public ResponseEntity<String> makeReservation(BookingSaveDto bookingSaveDto) {
-        AppUser user = appUserRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        Seance seance = seanceRepository.findById(bookingSaveDto.getSeanceId())
-                .orElseThrow(() -> new SeanceNotFoundException("Seance doesn't exist"));
-        ReservationStatus reservationStatus = reservationStatusRepository.findReservationStatusByStatusName("UnPaid")
-                .orElseThrow(() -> new ReservationStatusNotFoundException("Status doesn't exist"));
+        AppUser user = getCurrentUser();
+        Seance seance = getSeance(bookingSaveDto.getSeanceId());
+        ReservationStatus reservationStatus = getUnPaidReservationStatus();
+
         Reservation savedReservation = reservationRepository.save(new Reservation(user, seance, bookingSaveDto, reservationStatus));
 
-        for(Integer seatId : bookingSaveDto.getSeats()){
+        for (Integer seatId : bookingSaveDto.getSeats()) {
             Seat seat = seatRepository.findById(seatId).orElseThrow(() -> new SeatNotFoundException("seat doesn't exist"));
-            reservationSeatRepository.save(new ReservationSeat(seat,savedReservation));
+            reservationSeatRepository.save(new ReservationSeat(seat, savedReservation));
         }
 
 
-
         return new ResponseEntity<>("Yor reservation has been created", HttpStatus.OK);
+    }
+
+    @Override
+    public List<ReservationUserDto> getAllUserReservation() {
+        AppUser appUser = getCurrentUser();
+        List<Reservation> reservationList = reservationRepository.findAllByAppUser(appUser);
+        List<ReservationUserDto> reservationUserDto = new ArrayList<>();
+        for (Reservation reservation: reservationList) {
+            List<ReservationSeat> allByReservation = reservationSeatRepository.findAllByReservation(reservation);
+            List<SeatBookingReadDto> seatForReservation = allByReservation.stream().map(val -> new SeatBookingReadDto(val.getSeat())).collect(Collectors.toList());
+            reservationUserDto.add(new ReservationUserDto(reservation,seatForReservation));
+
+        }
+        return reservationUserDto;
+    }
+
+    public AppUser getCurrentUser() {
+        return appUserRepository.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    public Seance getSeance(Integer id) {
+        return seanceRepository.findById(id)
+                .orElseThrow(() -> new SeanceNotFoundException("Seance doesn't exist"));
+    }
+
+    public ReservationStatus getUnPaidReservationStatus() {
+        return reservationStatusRepository.findReservationStatusByStatusName("UnPaid")
+                .orElseThrow(() -> new ReservationStatusNotFoundException("Status doesn't exist"));
     }
 }
