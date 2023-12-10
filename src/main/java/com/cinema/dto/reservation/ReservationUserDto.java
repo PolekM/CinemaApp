@@ -17,6 +17,8 @@ public class ReservationUserDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String roomName;
+
+    private String reservationStatus;
     private List<SeatBookingReadDto> reservedSeats;
 
     public ReservationUserDto(Reservation reservation, List<SeatBookingReadDto> reservedSeats){
@@ -27,6 +29,7 @@ public class ReservationUserDto {
         this.endTime = reservation.getSeance().getEndTime();
         this.roomName = reservation.getSeance().getRoom().getRoomName();
         this.reservedSeats = reservedSeats;
+        this.reservationStatus = reservation.getReservationStatus().getStatusName();
 
     }
 }

@@ -13,4 +13,6 @@ public interface ReservationService {
     ResponseEntity<String> makeReservation(BookingSaveDto bookingSaveDto);
 
     List<ReservationUserDto> getAllUserReservation();
+
+    ResponseEntity<String> payForReservation(Integer id);
 }

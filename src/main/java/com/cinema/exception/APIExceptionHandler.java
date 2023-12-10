@@ -3,6 +3,7 @@ package com.cinema.exception;
 import com.cinema.exception.auth.UserDuplicateException;
 import com.cinema.exception.auth.WrongPasswordException;
 import com.cinema.exception.movie.MovieNotFoundException;
+import com.cinema.exception.reservation.ReservationNotFoundException;
 import com.cinema.exception.reservationStatus.ReservationStatusNotFoundException;
 import com.cinema.exception.room.RoomNotFoundException;
 import com.cinema.exception.seance.SeanceNotFoundException;
@@ -117,6 +118,17 @@ public class APIExceptionHandler {
 
         error.setCode(HttpStatus.NOT_FOUND.value());
         error.setMassage(seatNotFoundException.getMessage());
+        error.setErrorTime(new Date());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ReservationNotFoundException.class)
+    public ResponseEntity<Error> handleReservationStatusNotFoundException(ReservationNotFoundException reservationNotFoundException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.NOT_FOUND.value());
+        error.setMassage(reservationNotFoundException.getMessage());
         error.setErrorTime(new Date());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }

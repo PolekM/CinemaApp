@@ -5,6 +5,7 @@ import com.cinema.dto.reservation.BookingSaveDto;
 import com.cinema.dto.reservation.ReservationUserDto;
 import com.cinema.dto.seat.SeatBookingReadDto;
 import com.cinema.entity.*;
+import com.cinema.exception.reservation.ReservationNotFoundException;
 import com.cinema.exception.reservationStatus.ReservationStatusNotFoundException;
 import com.cinema.exception.seance.SeanceNotFoundException;
 import com.cinema.exception.seat.SeatNotFoundException;
@@ -19,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,16 +54,16 @@ public class ReservationServiceImp implements ReservationService {
                 .stream().map(SeatBookingReadDto::new).collect(Collectors.toList());
         List<SeatBookingReadDto> allReservedSeatsInRoom = seatRepository.findAllReservedSeatsBySeanceId(seance.getSeanceId())
                 .stream().map(SeatBookingReadDto::new).collect(Collectors.toList());
-        BookingReadDto bookingReadDto = new BookingReadDto(seance, allSeatsInRoom, allReservedSeatsInRoom);
-        return bookingReadDto;
+        return new BookingReadDto(seance, allSeatsInRoom, allReservedSeatsInRoom);
     }
 
     @Override
     @Transactional
     public ResponseEntity<String> makeReservation(BookingSaveDto bookingSaveDto) {
+        //ToDo - implementing if statement to disallow user book occupied seats
         AppUser user = getCurrentUser();
         Seance seance = getSeance(bookingSaveDto.getSeanceId());
-        ReservationStatus reservationStatus = getUnPaidReservationStatus();
+        ReservationStatus reservationStatus = getReservationStatus("UnPaid");
 
         Reservation savedReservation = reservationRepository.save(new Reservation(user, seance, bookingSaveDto, reservationStatus));
 
@@ -73,7 +73,7 @@ public class ReservationServiceImp implements ReservationService {
         }
 
 
-        return new ResponseEntity<>("Yor reservation has been created", HttpStatus.OK);
+        return new ResponseEntity<>("Your reservation has been created", HttpStatus.OK);
     }
 
     @Override
@@ -81,13 +81,25 @@ public class ReservationServiceImp implements ReservationService {
         AppUser appUser = getCurrentUser();
         List<Reservation> reservationList = reservationRepository.findAllByAppUser(appUser);
         List<ReservationUserDto> reservationUserDto = new ArrayList<>();
-        for (Reservation reservation: reservationList) {
+        for (Reservation reservation : reservationList) {
             List<ReservationSeat> allByReservation = reservationSeatRepository.findAllByReservation(reservation);
             List<SeatBookingReadDto> seatForReservation = allByReservation.stream().map(val -> new SeatBookingReadDto(val.getSeat())).collect(Collectors.toList());
-            reservationUserDto.add(new ReservationUserDto(reservation,seatForReservation));
+            reservationUserDto.add(new ReservationUserDto(reservation, seatForReservation));
 
         }
         return reservationUserDto;
+    }
+
+    @Override
+    public ResponseEntity<String> payForReservation(Integer id) {
+        //ToDo - create conditional instruction to disallow user Paid for not their reservation 
+        Reservation reservation = getReservation(id);
+        ReservationStatus reservationStatus = getReservationStatus("Paid");
+        reservation.changeReservationStatus(reservationStatus);
+        reservationRepository.save(reservation);
+
+
+        return new ResponseEntity<>("You Paid for your reservation", HttpStatus.OK);
     }
 
     public AppUser getCurrentUser() {
@@ -99,8 +111,12 @@ public class ReservationServiceImp implements ReservationService {
                 .orElseThrow(() -> new SeanceNotFoundException("Seance doesn't exist"));
     }
 
-    public ReservationStatus getUnPaidReservationStatus() {
-        return reservationStatusRepository.findReservationStatusByStatusName("UnPaid")
+    public Reservation getReservation(Integer id) {
+        return reservationRepository.findById(id).orElseThrow(() -> new ReservationNotFoundException("Reservation doesn't exist"));
+    }
+
+    public ReservationStatus getReservationStatus(String reservationStatus) {
+        return reservationStatusRepository.findReservationStatusByStatusName(reservationStatus)
                 .orElseThrow(() -> new ReservationStatusNotFoundException("Status doesn't exist"));
     }
 }

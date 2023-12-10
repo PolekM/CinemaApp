@@ -36,4 +36,9 @@ public class Reservation {
         this.reservationStatus = reservationStatus;
     }
 
+    public Reservation changeReservationStatus(ReservationStatus reservationStatus){
+        this.reservationStatus = reservationStatus;
+        return this;
+    }
+
 }

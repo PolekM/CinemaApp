@@ -36,4 +36,9 @@ public class ReservationController {
     public List<ReservationUserDto> getAllUserReservation(){
         return reservationService.getAllUserReservation();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> payForReservation(@PathVariable Integer id){
+        return reservationService.payForReservation(id);
+    }
 }
