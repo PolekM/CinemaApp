@@ -61,7 +61,6 @@ public class MovieServiceImp implements MovieService {
         Species species = speciesRepository.
                 findById(movieUpdateDto.getSpeciesId())
                 .orElseThrow(() -> new SpeciesNotFoundException("Species doesn't exist"));
-        //TODO change that ugly sets
         movie.UpdateMovie(movieUpdateDto,species);
         movieRepository.save(movie);
         log.info("Object updated correctly");

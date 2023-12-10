@@ -46,6 +46,7 @@ public class SeanceServiceImp implements SeanceService {
     @Transactional
     @Override
     public ResponseEntity<String> addNewSeance(SeanceSaveDto seanceSaveDto) {
+        //ToDo - create conditional instructions to disallow create seance when room will be busy
         Room room = getRoomById(seanceSaveDto.getRoomId());
         Movie movie = getMovieById(seanceSaveDto.getMovieId());
 
@@ -57,6 +58,7 @@ public class SeanceServiceImp implements SeanceService {
     @Transactional
     @Override
     public ResponseEntity<String> updateSeance(SeanceSaveDto seanceSaveDto, Integer id) {
+        //ToDo - create conditional instructions to disallow create seance when room will be busy
         Seance seance = seanceRepository.findById(id).
                 orElseThrow(() -> new SeanceNotFoundException("Seance doesn't exist"));
         Room room = getRoomById(seanceSaveDto.getRoomId());
