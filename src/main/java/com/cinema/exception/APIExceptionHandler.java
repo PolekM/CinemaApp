@@ -1,6 +1,7 @@
 package com.cinema.exception;
 
 import com.cinema.exception.auth.UserDuplicateException;
+import com.cinema.exception.auth.WrongCredentialException;
 import com.cinema.exception.auth.WrongPasswordException;
 import com.cinema.exception.movie.MovieNotFoundException;
 import com.cinema.exception.reservation.ReservationNotFoundException;
@@ -100,6 +101,16 @@ public class APIExceptionHandler {
         error.setMassage(wrongPasswordException.getMessage());
         error.setErrorTime(new Date());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(WrongCredentialException.class)
+    public ResponseEntity<Error> handleWrongCredentialException(WrongCredentialException wrongCredentialException) {
+
+        Error error = new Error();
+
+        error.setCode(HttpStatus.UNAUTHORIZED.value());
+        error.setMassage(wrongCredentialException.getMessage());
+        error.setErrorTime(new Date());
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
     @ExceptionHandler(ReservationStatusNotFoundException.class)
     public ResponseEntity<Error> handleReservationStatusNotFoundException(ReservationStatusNotFoundException reservationStatusNotFoundException) {
