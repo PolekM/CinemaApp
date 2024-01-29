@@ -58,9 +58,10 @@ public class AuthenticationServiceImp implements AuthenticationService {
             throw new WrongCredentialException("login or password is incorrect");
         }
         if (!passwordEncoder.matches(authLoginDto.getPassword(), user.getPassword())) {
-            throw new WrongPasswordException("login or password is incorrect");
+            throw new WrongCredentialException("login or password is incorrect");
         }
 
-        return new ResponseEntity<>("you are authenticated", HttpStatus.OK);
+        return new ResponseEntity<>(user.getUserRole().getRoleName(), HttpStatus.OK);
     }
 }
+

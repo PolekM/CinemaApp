@@ -109,6 +109,7 @@ public class DataInitializer implements CommandLineRunner {
                 "Aquaman",
                 "Some Description",
                 2018,
+                "https://fwcdn.pl/fpo/61/14/826114/8102089.3.jpg",
                 speciesList.get(1)
         ));
         movieList.add(new Movie(
@@ -116,6 +117,7 @@ public class DataInitializer implements CommandLineRunner {
                 "The BoogeyMan",
                 "Some Description",
                 2023,
+                "https://upload.wikimedia.org/wikipedia/en/8/89/The_Boogeyman_2023_poster.png",
                 speciesList.get(0)
         ));
 

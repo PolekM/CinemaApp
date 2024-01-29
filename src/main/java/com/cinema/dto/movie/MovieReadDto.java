@@ -11,6 +11,7 @@ public class MovieReadDto {
     private String description;
     private Integer yearOfProduction;
     private String speciesName;
+    private String movieUrl;
 
     public MovieReadDto(Movie movie) {
         this.movieId = movie.getMovieId();
@@ -18,5 +19,6 @@ public class MovieReadDto {
         this.description = movie.getDescription();
         this.yearOfProduction = movie.getYearOfProduction();
         this.speciesName = movie.getSpecies().getSpeciesName();
+        this.movieUrl = movie.getMovieUrl();
     }
 }

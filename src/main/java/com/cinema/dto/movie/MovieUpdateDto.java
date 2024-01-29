@@ -10,4 +10,5 @@ public class MovieUpdateDto {
     private String description;
     private Integer yearOfProduction;
     private Integer speciesId;
+    private String movieUrl;
 }

@@ -22,6 +22,7 @@ public class Movie {
     private String title;
     private String description;
     private Integer yearOfProduction;
+    private String movieUrl;
     @ManyToOne
     @JoinColumn(name = "species_id")
     private Species species;
@@ -31,6 +32,7 @@ public class Movie {
         this.description = movieSaveDto.getDescription();
         this.yearOfProduction = movieSaveDto.getYearOfProduction();
         this.species = species;
+        this.movieUrl = movieSaveDto.getMovieUrl();
     }
 
     public Movie UpdateMovie(MovieUpdateDto movieUpdateDto,Species species){
@@ -38,6 +40,7 @@ public class Movie {
         this.description = movieUpdateDto.getDescription();
         this.yearOfProduction =movieUpdateDto.getYearOfProduction();
         this.species = species;
+        this.movieUrl = movieUpdateDto.getMovieUrl();
 
         return this;
     }
