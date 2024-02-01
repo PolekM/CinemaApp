@@ -97,6 +97,9 @@ public class DataInitializer implements CommandLineRunner {
         List<Species> speciesList = new ArrayList<>();
         speciesList.add(new Species(1, "Horror"));
         speciesList.add(new Species(2, "Fantasy"));
+        speciesList.add(new Species(3, "Animation"));
+        speciesList.add(new Species(4, "Family"));
+        speciesList.add(new Species(5, "Adventure"));
 
         return speciesList;
     }
@@ -119,6 +122,38 @@ public class DataInitializer implements CommandLineRunner {
                 2023,
                 "https://upload.wikimedia.org/wikipedia/en/8/89/The_Boogeyman_2023_poster.png",
                 speciesList.get(0)
+        ));
+        movieList.add(new Movie(
+                3,
+                "The Boy and the Heron",
+                "Some Description",
+                2023,
+                "https://m.media-amazon.com/images/M/MV5BNmI2MzJkYzYtM2Y2My00NmJmLTgxZDAtODAwNjBmM2RlZjRhXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
+                speciesList.get(3)
+        ));
+        movieList.add(new Movie(
+                4,
+                "Spirited Away",
+                "Some Description",
+                2001,
+                "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg",
+                speciesList.get(3)
+        ));
+        movieList.add(new Movie(
+                5,
+                "The Witch",
+                "Some Description",
+                2015,
+                "https://m.media-amazon.com/images/M/MV5BMTUyNzkwMzAxOF5BMl5BanBnXkFtZTgwMzc1OTk1NjE@._V1_.jpg",
+                speciesList.get(3)
+        ));
+        movieList.add(new Movie(
+                6,
+                "Avatar 2",
+                "Some Description",
+                2023,
+                "https://fwcdn.pl/fpo/81/78/558178/8047434.3.jpg",
+                speciesList.get(3)
         ));
 
         return movieList;
