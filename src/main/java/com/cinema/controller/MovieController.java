@@ -24,8 +24,10 @@ public class MovieController {
 
 
     @GetMapping()
-    public List<MovieReadDto> getAllMovie(){
-        return movieService.getAllMovie();
+    public List<MovieReadDto> getAllMovie(
+            @RequestParam(value = "pageNo",defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize",defaultValue = "10", required = false) int pageSize){
+        return movieService.getAllMovie(pageNo,pageSize);
     }
 
     @PostMapping("/add")
