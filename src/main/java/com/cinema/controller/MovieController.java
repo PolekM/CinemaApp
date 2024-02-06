@@ -30,6 +30,13 @@ public class MovieController {
         return movieService.getAllMovie(pageNo,pageSize);
     }
 
+    @GetMapping("/{id}")
+        public MovieReadDto getMovieById(@PathVariable(name = "id") int movieId){
+            return movieService.getMovieById(movieId);
+        }
+
+
+
     @PostMapping("/add")
     public ResponseEntity<String> addNewMovie(@RequestBody MovieSaveDto movieSaveDto){
         return movieService.addNewMovie(movieSaveDto);

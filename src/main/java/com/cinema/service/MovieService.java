@@ -15,4 +15,6 @@ public interface MovieService {
     ResponseEntity<String> addNewMovie(MovieSaveDto movieSaveDto);
 
     ResponseEntity<String> updateMovie(MovieUpdateDto movieUpdateDto, Integer id);
+
+    MovieReadDto getMovieById(int movieId);
 }

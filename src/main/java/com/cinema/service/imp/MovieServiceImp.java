@@ -37,8 +37,8 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
-    public List<MovieReadDto> getAllMovie(int pageNo,int pageSize) {
-        PageRequest pageable = PageRequest.of(pageNo,pageSize);
+    public List<MovieReadDto> getAllMovie(int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo, pageSize);
         Page<Movie> moviePage = movieRepository.findAll(pageable);
         return moviePage.getContent().stream().map(MovieReadDto::new).collect(Collectors.toList());
     }
@@ -61,16 +61,22 @@ public class MovieServiceImp implements MovieService {
     public ResponseEntity<String> updateMovie(MovieUpdateDto movieUpdateDto, Integer id) {
 
         Movie movie = movieRepository.findById(id)
-                        .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
+                .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
 
         Species species = speciesRepository.
                 findById(movieUpdateDto.getSpeciesId())
                 .orElseThrow(() -> new SpeciesNotFoundException("Species doesn't exist"));
-        movie.UpdateMovie(movieUpdateDto,species);
+        movie.UpdateMovie(movieUpdateDto, species);
         movieRepository.save(movie);
         log.info("Object updated correctly");
         return new ResponseEntity<>("Object updated correctly", HttpStatus.OK);
+    }
 
-
+    @Override
+    public MovieReadDto getMovieById(int movieId) {
+        MovieReadDto movieReadDto = movieRepository.findById(movieId)
+                .map(MovieReadDto::new)
+                .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
+        return movieReadDto;
     }
 }
