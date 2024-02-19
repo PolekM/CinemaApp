@@ -20,6 +20,7 @@ public class Movie {
     @Column(name = "movie_id")
     private Integer movieId;
     private String title;
+    @Column(length = 2048)
     private String description;
     private Integer yearOfProduction;
     private String movieUrl;
