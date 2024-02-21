@@ -1,13 +1,16 @@
 package com.cinema.controller;
 
+import com.cinema.dto.movie.MoviePageableDto;
 import com.cinema.dto.movie.MovieReadDto;
 import com.cinema.dto.movie.MovieUpdateDto;
 import com.cinema.dto.movie.MovieSaveDto;
 import com.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
@@ -23,12 +26,14 @@ public class MovieController {
     }
 
 
+
     @GetMapping()
-    public List<MovieReadDto> getAllMovie(
+    public MoviePageableDto getAllMovie(
             @RequestParam(value = "pageNo",defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize",defaultValue = "10", required = false) int pageSize){
+            @RequestParam(value = "pageSize",defaultValue = "8", required = false) int pageSize){
         return movieService.getAllMovie(pageNo,pageSize);
     }
+
 
     @GetMapping("/{id}")
         public MovieReadDto getMovieById(@PathVariable(name = "id") int movieId){

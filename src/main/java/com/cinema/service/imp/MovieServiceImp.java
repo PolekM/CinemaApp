@@ -1,5 +1,6 @@
 package com.cinema.service.imp;
 
+import com.cinema.dto.movie.MoviePageableDto;
 import com.cinema.dto.movie.MovieReadDto;
 import com.cinema.dto.movie.MovieUpdateDto;
 import com.cinema.dto.movie.MovieSaveDto;
@@ -37,10 +38,12 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
-    public List<MovieReadDto> getAllMovie(int pageNo, int pageSize) {
+    public MoviePageableDto getAllMovie(int pageNo, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNo, pageSize);
         Page<Movie> moviePage = movieRepository.findAll(pageable);
-        return moviePage.getContent().stream().map(MovieReadDto::new).collect(Collectors.toList());
+        List<MovieReadDto> collectMovie = moviePage.getContent().stream().map(MovieReadDto::new).collect(Collectors.toList());
+        return new MoviePageableDto(collectMovie,pageNo,moviePage.getTotalPages(),moviePage.getTotalElements());
+      
     }
 
     @Override
