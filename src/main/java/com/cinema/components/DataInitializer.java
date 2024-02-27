@@ -217,14 +217,14 @@ public class DataInitializer implements CommandLineRunner {
         List<SeanceSaveDto> seanceSaveDto = new ArrayList<>();
         seanceSaveDto.add(new SeanceSaveDto(
                 20,
-                LocalDateTime.of(2023, 11, 29, 14, 0),
-                LocalDateTime.of(2023, 11, 29, 14, 0),
+                LocalDateTime.now(),
+                LocalDateTime.now().plusHours(1),
                 1,
                 1));
         seanceSaveDto.add(new SeanceSaveDto(
                 20,
-                LocalDateTime.of(2023, 11, 29, 16, 0),
-                LocalDateTime.of(2023, 11, 29, 17, 0),
+                LocalDateTime.now(),
+                LocalDateTime.now().plusHours(2),
                 2,
                 2));
         return seanceSaveDto.stream().map(seanceDto -> new Seance(seanceDto, movieRepository.findById(seanceDto.getMovieId()).get(), roomRepository.findById(seanceDto.getRoomId()).get())).collect(Collectors.toList());
