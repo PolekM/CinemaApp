@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -35,6 +37,13 @@ public class SeanceController {
     public ResponseEntity<String> updateSeance(@RequestBody SeanceSaveDto seanceSaveDto, @PathVariable Integer id){
         return seanceService.updateSeance(seanceSaveDto,id);
     }
+
+    @GetMapping("/date")
+    public List<SeanceReadDto> getAllSeanceByDate(
+            @RequestParam(name = "date",required = false,defaultValue = "#{T(java.time.LocalDate).now()}") LocalDate localDate){
+        return seanceService.getAllSeanceByDate(localDate);
+    }
+
 }
 
 

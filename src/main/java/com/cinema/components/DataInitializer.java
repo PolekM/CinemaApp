@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -217,14 +218,20 @@ public class DataInitializer implements CommandLineRunner {
         List<SeanceSaveDto> seanceSaveDto = new ArrayList<>();
         seanceSaveDto.add(new SeanceSaveDto(
                 20,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusHours(1),
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusHours(2),
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusHours(3),
                 1,
                 1));
         seanceSaveDto.add(new SeanceSaveDto(
                 20,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusHours(2),
+                LocalDateTime.now().plusHours(1),
+                LocalDateTime.now().plusHours(3),
+                2,
+                2));
+        seanceSaveDto.add(new SeanceSaveDto(
+                20,
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusDays(1),
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusDays(1).plusHours(2),
                 2,
                 2));
         return seanceSaveDto.stream().map(seanceDto -> new Seance(seanceDto, movieRepository.findById(seanceDto.getMovieId()).get(), roomRepository.findById(seanceDto.getRoomId()).get())).collect(Collectors.toList());

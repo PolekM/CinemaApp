@@ -19,6 +19,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,6 +70,12 @@ public class SeanceServiceImp implements SeanceService {
 
         log.info("Object updated correctly");
         return new ResponseEntity<>("Object updated correctly", HttpStatus.OK);
+    }
+
+    @Override
+    public List<SeanceReadDto> getAllSeanceByDate(LocalDate localDate) {
+        System.out.println(localDate);
+        return seanceRepository.findAllByDate(localDate).stream().map(SeanceReadDto::new).collect(Collectors.toList());
     }
 
     private Room getRoomById(Integer roomId) {
