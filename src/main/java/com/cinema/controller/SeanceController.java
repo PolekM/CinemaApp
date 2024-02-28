@@ -1,6 +1,7 @@
 package com.cinema.controller;
 
 import com.cinema.dto.seance.SeanceReadDto;
+import com.cinema.dto.seance.SeanceReadWithStarTimeListDto;
 import com.cinema.dto.seance.SeanceSaveDto;
 import com.cinema.service.SeanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class SeanceController {
     }
 
     @GetMapping("/date")
-    public List<SeanceReadDto> getAllSeanceByDate(
+    public List<SeanceReadWithStarTimeListDto> getAllSeanceByDate(
             @RequestParam(name = "date",required = false,defaultValue = "#{T(java.time.LocalDate).now()}") LocalDate localDate){
         return seanceService.getAllSeanceByDate(localDate);
     }

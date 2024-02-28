@@ -1,7 +1,9 @@
 package com.cinema.service.imp;
 
 import com.cinema.dto.seance.SeanceReadDto;
+import com.cinema.dto.seance.SeanceReadWithStarTimeListDto;
 import com.cinema.dto.seance.SeanceSaveDto;
+import com.cinema.dto.seance.SeanceStartTime;
 import com.cinema.entity.Movie;
 import com.cinema.entity.Room;
 import com.cinema.entity.Seance;
@@ -22,6 +24,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -73,9 +77,20 @@ public class SeanceServiceImp implements SeanceService {
     }
 
     @Override
-    public List<SeanceReadDto> getAllSeanceByDate(LocalDate localDate) {
+    public List<SeanceReadWithStarTimeListDto> getAllSeanceByDate(LocalDate localDate) {
         System.out.println(localDate);
-        return seanceRepository.findAllByDate(localDate).stream().map(SeanceReadDto::new).collect(Collectors.toList());
+        List<Seance> allSeanceByDate = seanceRepository.findAllByDate(localDate);
+        HashMap<String, SeanceReadWithStarTimeListDto> hashMap = new HashMap<>();
+        for (Seance seance : allSeanceByDate) {
+            if (!hashMap.containsKey(seance.getMovie().getTitle())) {
+                hashMap.put(seance.getMovie().getTitle(),
+                        new SeanceReadWithStarTimeListDto(seance));
+            } else {
+                hashMap.get(seance.getMovie().getTitle()).getSeanceStartTimeList().add(new SeanceStartTime(seance.getSeanceId(), seance.getStartTime()));
+            }
+        }
+
+        return hashMap.values().stream().toList();
     }
 
     private Room getRoomById(Integer roomId) {

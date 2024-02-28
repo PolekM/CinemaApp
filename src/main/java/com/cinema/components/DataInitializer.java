@@ -234,6 +234,18 @@ public class DataInitializer implements CommandLineRunner {
                 LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusDays(1).plusHours(2),
                 2,
                 2));
+        seanceSaveDto.add(new SeanceSaveDto(
+                20,
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusDays(1).plusHours(3),
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusDays(1).plusHours(5),
+                2,
+                2));
+        seanceSaveDto.add(new SeanceSaveDto(
+                20,
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusDays(1).plusHours(3),
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusDays(1).plusHours(5),
+                1,
+                2));
         return seanceSaveDto.stream().map(seanceDto -> new Seance(seanceDto, movieRepository.findById(seanceDto.getMovieId()).get(), roomRepository.findById(seanceDto.getRoomId()).get())).collect(Collectors.toList());
     }
 

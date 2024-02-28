@@ -1,6 +1,7 @@
 package com.cinema.service;
 
 import com.cinema.dto.seance.SeanceReadDto;
+import com.cinema.dto.seance.SeanceReadWithStarTimeListDto;
 import com.cinema.dto.seance.SeanceSaveDto;
 import org.springframework.http.ResponseEntity;
 
@@ -15,5 +16,5 @@ public interface SeanceService {
 
     ResponseEntity<String> updateSeance(SeanceSaveDto seanceSaveDto, Integer id);
 
-    List<SeanceReadDto> getAllSeanceByDate(LocalDate localDate);
+    List<SeanceReadWithStarTimeListDto> getAllSeanceByDate(LocalDate localDate);
 }
