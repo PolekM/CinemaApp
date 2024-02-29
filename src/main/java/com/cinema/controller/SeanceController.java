@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/seance")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SeanceController {
 
     private final SeanceService seanceService;
