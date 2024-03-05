@@ -7,13 +7,13 @@ import lombok.Data;
 public class SeatBookingReadDto {
 
     private Integer seatId;
-    private Integer row_number;
-    private Integer seat_number;
+    private Integer rowNumber;
+    private Integer seatNumber;
 
     public SeatBookingReadDto(Seat seat){
         this.seatId = seat.getSeatId();
-        this.seat_number = seat.getSeatNumber();
-        this.row_number = seat.getRowNumber();
+        this.seatNumber = seat.getSeatNumber();
+        this.rowNumber = seat.getRowNumber();
     }
 }
 
