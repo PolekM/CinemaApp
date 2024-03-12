@@ -46,6 +46,11 @@ public class SeanceController {
         return seanceService.getAllSeanceByDate(localDate);
     }
 
+    @GetMapping("/{id}")
+    public SeanceReadDto getSeanceById(@PathVariable(name = "id") Integer id){
+        return seanceService.getSeanceById(id);
+    }
+
 }
 
 

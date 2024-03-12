@@ -102,4 +102,14 @@ public class SeanceServiceImp implements SeanceService {
         return movieRepository.findById(movieId)
                 .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
     }
+
+    @Override
+    public SeanceReadDto getSeanceById(Integer id) {
+        Optional<SeanceReadDto> seanceReadDto = seanceRepository.findById(id).map(SeanceReadDto::new);
+        if(seanceReadDto.isEmpty()){
+            throw new SeanceNotFoundException("Seance doesn't exist");
+        }
+
+        return seanceReadDto.get();
+    }
 }

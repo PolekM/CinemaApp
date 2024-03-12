@@ -17,4 +17,6 @@ public interface SeanceService {
     ResponseEntity<String> updateSeance(SeanceSaveDto seanceSaveDto, Integer id);
 
     List<SeanceReadWithStarTimeListDto> getAllSeanceByDate(LocalDate localDate);
+
+    SeanceReadDto getSeanceById(Integer id);
 }
