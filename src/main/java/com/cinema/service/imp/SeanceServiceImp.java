@@ -93,6 +93,12 @@ public class SeanceServiceImp implements SeanceService {
         return hashMap.values().stream().toList();
     }
 
+    @Override
+    public SeanceReadDto getSeanceById(Integer id) {
+        Seance seance = seanceRepository.findById(id).orElseThrow(() -> new SeanceNotFoundException("Seance dosen't exist"));
+        return new SeanceReadDto(seance);
+    }
+
     private Room getRoomById(Integer roomId) {
         return roomRepository.findById(roomId)
                 .orElseThrow(() -> new RoomNotFoundException("Room doesn't exist"));
@@ -103,13 +109,5 @@ public class SeanceServiceImp implements SeanceService {
                 .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
     }
 
-    @Override
-    public SeanceReadDto getSeanceById(Integer id) {
-        Optional<SeanceReadDto> seanceReadDto = seanceRepository.findById(id).map(SeanceReadDto::new);
-        if(seanceReadDto.isEmpty()){
-            throw new SeanceNotFoundException("Seance doesn't exist");
-        }
 
-        return seanceReadDto.get();
-    }
 }
