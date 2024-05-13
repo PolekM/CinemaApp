@@ -13,6 +13,7 @@ public class ReservationUserDto {
 
     private Integer reservationId;
     private String movieName;
+    private String movieUrl;
     private Integer ticketCost;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -30,6 +31,7 @@ public class ReservationUserDto {
         this.roomName = reservation.getSeance().getRoom().getRoomName();
         this.reservedSeats = reservedSeats;
         this.reservationStatus = reservation.getReservationStatus().getStatusName();
+        this.movieUrl = reservation.getSeance().getMovie().getMovieUrl();
 
     }
 }
