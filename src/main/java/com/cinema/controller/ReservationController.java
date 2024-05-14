@@ -29,7 +29,7 @@ public class ReservationController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> makeReservation(@RequestBody BookingSaveDto bookingSaveDto){
+    public ReservationUserDto makeReservation(@RequestBody BookingSaveDto bookingSaveDto){
         return reservationService.makeReservation(bookingSaveDto);
 
     }

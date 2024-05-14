@@ -10,7 +10,7 @@ import java.util.List;
 public interface ReservationService {
     BookingReadDto getBookingData(Integer id);
 
-    ResponseEntity<String> makeReservation(BookingSaveDto bookingSaveDto);
+    ReservationUserDto makeReservation(BookingSaveDto bookingSaveDto);
 
     List<ReservationUserDto> getAllUserReservation();
 

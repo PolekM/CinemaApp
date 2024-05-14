@@ -61,21 +61,22 @@ public class ReservationServiceImp implements ReservationService {
 
     @Override
     @Transactional
-    public ResponseEntity<String> makeReservation(BookingSaveDto bookingSaveDto) {
+    public ReservationUserDto makeReservation(BookingSaveDto bookingSaveDto) {
         //ToDo - implementing if statement to disallow user book occupied seats
         AppUser user = getCurrentUser();
         Seance seance = getSeance(bookingSaveDto.getSeanceId());
         ReservationStatus reservationStatus = getReservationStatus("UnPaid");
-
+        List<SeatBookingReadDto> ListOfSeatsId = new ArrayList<>();
         Reservation savedReservation = reservationRepository.save(new Reservation(user, seance, bookingSaveDto, reservationStatus));
 
         for (Integer seatId : bookingSaveDto.getSeats()) {
             Seat seat = seatRepository.findById(seatId).orElseThrow(() -> new SeatNotFoundException("seat doesn't exist"));
+            ListOfSeatsId.add(new SeatBookingReadDto(seat));
             reservationSeatRepository.save(new ReservationSeat(seat, savedReservation));
         }
 
 
-        return new ResponseEntity<>("Your reservation has been created", HttpStatus.OK);
+        return new ReservationUserDto(savedReservation, ListOfSeatsId);
     }
 
     @Override
