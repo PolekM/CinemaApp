@@ -38,6 +38,13 @@ public class ReservationController {
         return reservationService.getAllUserReservation();
     }
 
+    @GetMapping("/user/{id}")
+    public ReservationUserDto getUserReservationById(@PathVariable Integer id){
+        return reservationService.getUserReservationById(id);
+
+    }
+
+
     @PutMapping("/{id}")
     public ResponseEntity<String> payForReservation(@PathVariable Integer id){
         return reservationService.payForReservation(id);

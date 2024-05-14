@@ -12,4 +12,5 @@ import java.util.List;
 public interface ReservationSeatRepository  extends JpaRepository<ReservationSeat,Integer> {
 
     List<ReservationSeat> findAllByReservation(Reservation reservation);
+    List<ReservationSeat> findAllByReservationSeatId(Integer id);
 }

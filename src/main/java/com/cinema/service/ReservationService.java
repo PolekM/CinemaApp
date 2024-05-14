@@ -15,4 +15,6 @@ public interface ReservationService {
     List<ReservationUserDto> getAllUserReservation();
 
     ResponseEntity<String> payForReservation(Integer id);
+
+    ReservationUserDto getUserReservationById(Integer id);
 }

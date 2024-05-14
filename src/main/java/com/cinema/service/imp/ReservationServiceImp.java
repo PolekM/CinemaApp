@@ -5,6 +5,7 @@ import com.cinema.dto.reservation.BookingSaveDto;
 import com.cinema.dto.reservation.ReservationUserDto;
 import com.cinema.dto.seat.SeatBookingReadDto;
 import com.cinema.entity.*;
+import com.cinema.exception.auth.WrongCredentialException;
 import com.cinema.exception.reservation.ReservationNotFoundException;
 import com.cinema.exception.reservationStatus.ReservationStatusNotFoundException;
 import com.cinema.exception.seance.SeanceNotFoundException;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -100,6 +102,19 @@ public class ReservationServiceImp implements ReservationService {
 
 
         return new ResponseEntity<>("You Paid for your reservation", HttpStatus.OK);
+    }
+
+    @Override
+    public ReservationUserDto getUserReservationById(Integer id) {
+        System.out.println("test");
+        AppUser appUser = getCurrentUser();
+        Reservation reservation = getReservation(id);
+        if(!appUser.equals(reservation.getAppUser())){
+            throw new WrongCredentialException("Wrong User Credential");
+        }
+        List<SeatBookingReadDto> seats = reservationSeatRepository.findAllByReservationSeatId(id).stream().map(val -> new SeatBookingReadDto(val.getSeat())).toList();
+
+        return new ReservationUserDto(reservation,seats);
     }
 
     public AppUser getCurrentUser() {
