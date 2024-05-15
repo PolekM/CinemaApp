@@ -95,8 +95,12 @@ public class ReservationServiceImp implements ReservationService {
 
     @Override
     public ResponseEntity<String> payForReservation(Integer id) {
-        //ToDo - create conditional instruction to disallow user Paid for not their reservation 
+        //ToDo - create conditional instruction to disallow user Paid for not their reservation
+        AppUser currentUser = getCurrentUser();
         Reservation reservation = getReservation(id);
+        if(!currentUser.equals(reservation.getAppUser())){
+            throw new WrongCredentialException("You can`t pay for not your reservation");
+        }
         ReservationStatus reservationStatus = getReservationStatus("Paid");
         reservation.changeReservationStatus(reservationStatus);
         reservationRepository.save(reservation);
