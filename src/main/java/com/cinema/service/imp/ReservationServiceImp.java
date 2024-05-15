@@ -7,6 +7,7 @@ import com.cinema.dto.seat.SeatBookingReadDto;
 import com.cinema.entity.*;
 import com.cinema.exception.auth.WrongCredentialException;
 import com.cinema.exception.reservation.ReservationNotFoundException;
+import com.cinema.exception.reservation.ReservedSeatException;
 import com.cinema.exception.reservationStatus.ReservationStatusNotFoundException;
 import com.cinema.exception.seance.SeanceNotFoundException;
 import com.cinema.exception.seat.SeatNotFoundException;
@@ -62,15 +63,18 @@ public class ReservationServiceImp implements ReservationService {
     @Override
     @Transactional
     public ReservationUserDto makeReservation(BookingSaveDto bookingSaveDto) {
-        //ToDo - implementing if statement to disallow user book occupied seats
         AppUser user = getCurrentUser();
         Seance seance = getSeance(bookingSaveDto.getSeanceId());
         ReservationStatus reservationStatus = getReservationStatus("UnPaid");
         List<SeatBookingReadDto> ListOfSeatsId = new ArrayList<>();
         Reservation savedReservation = reservationRepository.save(new Reservation(user, seance, bookingSaveDto, reservationStatus));
+        List<Seat> allReservedSeatsBySeanceId = seatRepository.findAllReservedSeatsBySeanceId(seance.getSeanceId());
 
         for (Integer seatId : bookingSaveDto.getSeats()) {
             Seat seat = seatRepository.findById(seatId).orElseThrow(() -> new SeatNotFoundException("seat doesn't exist"));
+            if(allReservedSeatsBySeanceId.contains(seat)){
+                throw new ReservedSeatException("Seat is already taken");
+            }
             ListOfSeatsId.add(new SeatBookingReadDto(seat));
             reservationSeatRepository.save(new ReservationSeat(seat, savedReservation));
         }
@@ -95,7 +99,6 @@ public class ReservationServiceImp implements ReservationService {
 
     @Override
     public ResponseEntity<String> payForReservation(Integer id) {
-        //ToDo - create conditional instruction to disallow user Paid for not their reservation
         AppUser currentUser = getCurrentUser();
         Reservation reservation = getReservation(id);
         if(!currentUser.equals(reservation.getAppUser())){
@@ -111,13 +114,12 @@ public class ReservationServiceImp implements ReservationService {
 
     @Override
     public ReservationUserDto getUserReservationById(Integer id) {
-        System.out.println("test");
         AppUser appUser = getCurrentUser();
         Reservation reservation = getReservation(id);
         if(!appUser.equals(reservation.getAppUser())){
             throw new WrongCredentialException("Wrong User Credential");
         }
-        List<SeatBookingReadDto> seats = reservationSeatRepository.findAllByReservationSeatId(id).stream().map(val -> new SeatBookingReadDto(val.getSeat())).toList();
+        List<SeatBookingReadDto> seats = reservationSeatRepository.findAllByReservation(reservation).stream().map(val -> new SeatBookingReadDto(val.getSeat())).toList();
 
         return new ReservationUserDto(reservation,seats);
     }
