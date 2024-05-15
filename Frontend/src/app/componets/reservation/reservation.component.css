@@ -1,0 +1,41 @@
+#square{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 15px;
+}
+
+.allowedSeats{
+    background-color: rgb(75, 233, 75);
+}
+.reservedSeats{
+    background-color: rgb(179, 171, 171);
+}
+.chooseSeats{
+    background-color: orange;
+}
+
+#seats{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 15px;
+}
+#screen{
+
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: grey;
+    color: white;
+}
+
+

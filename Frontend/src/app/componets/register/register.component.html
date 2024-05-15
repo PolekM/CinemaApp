@@ -1,0 +1,25 @@
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="inactive underlineHover" routerLink="/login"> Sign In </h2>
+      <h2 class="active">Sign Up </h2>
+  
+     
+  
+      <!-- Login Form -->
+      <form (ngSubmit)="registerUser()">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)] ="registerSaveDto.login">
+        <input type="text" id="password" class="fadeIn third" name="password" placeholder="password" [(ngModel)] ="registerSaveDto.password">
+        <input type="text" id="password" class="fadeIn third" name="password" placeholder="reapet password"[(ngModel)] ="registerSaveDto.repeatPassword">
+        <input type="text" id="password" class="fadeIn third" name="email" placeholder="email"[(ngModel)] ="registerSaveDto.email">
+        <input type="submit" class="fadeIn fourth" value="Register">
+      </form>
+  
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+  
+    </div>
+  </div>

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="">CinemaApp</a>
+    <button class="navbar-toggler custom-toggler-icon" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">News</a>
+        <a class="nav-link" routerLink="/seance">Seance</a>
+        <a class="nav-link" routerLink="/movie">Movie</a>
+        <a *ngIf="!(isLoggedIn | async)" class="nav-link"  routerLink="/login" >LogIn</a>
+          <div *ngIf="(isLoggedIn | async)"  ngbDropdown class="d-inline-block" >
+            <button  class="nav-link" id="dropdown" ngbDropdownToggle type="button">Account</button> 
+            <div ngbDropdownMenu aria-labelledby="dropdown" placement="bottom-right">
+              <button ngbDropdownItem>Profile</button> 
+              <button ngbDropdownItem>Edit profile</button> 
+              <button ngbDropdownItem routerLink="/ticket">My Ticket</button>
+              <div class="dropdown-divider"></div> 
+              <button ngbDropdownItem (click)="logoutUser()">Logout</button> 
+            </div> 
+          
+      </div>
+      </div>
+    </div>
+    
+  </div>
+  
+</nav>

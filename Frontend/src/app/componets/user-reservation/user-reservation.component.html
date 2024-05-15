@@ -1,0 +1,26 @@
+<div class="container">
+<div class="row" >
+    <ng-container *ngFor="let t of userTicket">
+        <div class="row justify-content-center">
+            <img class="col-lg-2 col-md-3 col-sm-3" style="max-width: 150px;" src={{t.movieUrl}}>
+            <div class="col-lg-2 col-md-3 col-sm-3">
+                <p>Movie: {{t.movieName}} </p> 
+                <p>Room: {{t.roomName}}</p> 
+                <p>ticketCost: {{t.ticketCost}}</p>
+                <p>Status: {{t.reservationStatus}}</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-2">Seats:
+                <ng-container *ngFor="let s of t.reservedSeats">
+                    {{s.seatId}},
+                </ng-container>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3"><p>Start: {{t.startTime}} </p> <p>End: {{t.endTime}}</p> <button class="dark" [routerLink]="['/ticket',t.reservationId]"> Details</button></div>
+            
+        </div>
+        <div class="row justify-content-center">
+            <hr class="col-lg-7 hr hr-blurry" />
+        </div>
+    </ng-container>
+
+</div>
+</div>

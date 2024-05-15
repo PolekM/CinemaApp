@@ -1,0 +1,38 @@
+<div class="container">
+<div class="row">
+    <div class="col-md-12 col-lg-12 d-flex justify-content-center">
+        <div id="square" class="col-md-3 col-lg-3 allowedSeats">Free</div>
+        <div id="square" class="col-md-3 col-lg-3 reservedSeats">Busy</div>
+        <div id="square" class="col-md-3 col-lg-3 chooseSeats">Your Choice</div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-4 col-sm-4" id="screen">SCREEN</div>
+</div>
+<div class="row justify-content-center">
+    <ng-container *ngFor="let r of SeanceDatails.seatsInRoom; let i = index">
+        <div class="col-lg-1 col-md-1 col-sm-1">
+            <div 
+            [ngClass]="{ 'allowedSeats': !isReserved(r.seatId) , 
+            'reservedSeats': isReserved(r.seatId), 
+            'disabled': isReserved(r.seatId) }"  
+            (click) = "!isReserved(r.seatId)? addToSelectedSeatsList(r.seatId): null"  
+            [class.chooseSeats]="isSelected(r.seatId)" id="seats">{{r.seatId}}</div>
+        </div>
+        <div *ngIf="(i + 1) % 4 === 0 " class="w-100"></div>
+    </ng-container>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-3 col-md-3 col-sm-3 text-center"><h2> Selected Seats</h2></div>
+    <div class="col-lg-2 col-md-2 col-sm-2 text-center"><button type="button" class="btn btn-success" (click)="makeReservation()" [disabled]="selectedSeats.length===0">Make Reservation</button></div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-1 col-md-1 col-sm-1 text-center" *ngFor="let r of selectedSeats">{{r}}</div>
+</div>
+<div class="row justify-content-center">
+   
+</div>
+</div>
+
+
+

@@ -1,0 +1,9 @@
+
+
+#mycontent{
+  margin-top: 20px;
+ z-index: 200;
+}
+#mynav{
+  z-index: 1000;
+}

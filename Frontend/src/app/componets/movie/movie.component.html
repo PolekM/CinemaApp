@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row ">
+   <div *ngFor="let m of movies.content" class="col-lg-3 col-md-6 d-flex justify-content-center">
+          <div class="card" style="width: 15rem;">
+            <img class="card-img-top" src={{m.movieUrl}} alt="Card image cap" height="350px">
+            <div class="card-body text-center">
+              <h5 class="card-title ">{{m.title}}</h5>
+              <p class="card-text">{{reducDescriptionSize(m.description)}}</p>
+              <a href="#" class="btn btn-primary" [routerLink]="['/movie',m.movieId]">read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <ul class="pagination justify-content-end text-center">
+
+          <li class="page-item" >
+            <a class="page-link" aria-label="Previous" [class.disabled]="movies.currentPage+1 === 1" (click)="getMovie(movies.currentPage-1)">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only"></span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" >{{movies.currentPage+1}}</a></li>
+          <li class="page-item">
+            <a class="page-link" aria-label="Next" [class.disabled]="movies.currentPage+1 === movies.totalPage"  (click)="getMovie(movies.currentPage+1)">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only"></span>
+            </a>
+          </li>
+        </ul>
+    </div>
+  </div>
