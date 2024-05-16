@@ -104,6 +104,9 @@ public class ReservationServiceImp implements ReservationService {
         if(!currentUser.equals(reservation.getAppUser())){
             throw new WrongCredentialException("You can`t pay for not your reservation");
         }
+        if(!reservation.getReservationStatus().getStatusName().equals("Paid")){
+            throw new ReservedSeatException("Reservation is already Paid");
+        }
         ReservationStatus reservationStatus = getReservationStatus("Paid");
         reservation.changeReservationStatus(reservationStatus);
         reservationRepository.save(reservation);
