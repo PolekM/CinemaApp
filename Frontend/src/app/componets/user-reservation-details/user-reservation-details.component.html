@@ -13,7 +13,11 @@
                         {{s.seatId}},
                     </ng-container>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-3"><p>Start: {{tickedDetail.startTime}} </p> <p>End: {{tickedDetail.endTime}}</p> <button class="dark" (click)="payForReservation(tickedDetail.reservationId)"> Pay</button> <button class="dark" routerLink="/ticket"> My Ticket</button></div>
+                <div class="col-lg-2 col-md-2 col-sm-3">
+                    <p>Start: {{tickedDetail.startTime}} </p>
+                    <p>End: {{tickedDetail.endTime}}</p> 
+                    <button class="dark" (click)="payForReservation(tickedDetail.reservationId)" [disabled]="tickedDetail.reservationStatus=='Paid'"> Pay</button> 
+                    <button class="dark" routerLink="/ticket"> My Ticket</button></div>
                 
             </div>
             <div class="row justify-content-center">
