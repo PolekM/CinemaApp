@@ -19,4 +19,6 @@ public interface MovieService {
     ResponseEntity<String> updateMovie(MovieUpdateDto movieUpdateDto, Integer id);
 
     MovieReadDto getMovieById(int movieId);
+
+    List<MovieReadDto> movieSearch(String text);
 }

@@ -11,10 +11,12 @@ import com.cinema.exception.species.SpeciesNotFoundException;
 import com.cinema.repository.MovieRepository;
 import com.cinema.repository.SpeciesRepository;
 import com.cinema.service.MovieService;
+import com.cinema.specification.MovieSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -81,5 +83,14 @@ public class MovieServiceImp implements MovieService {
                 .map(MovieReadDto::new)
                 .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
         return movieReadDto;
+    }
+
+    @Override
+    public List<MovieReadDto> movieSearch(String text) {
+        Specification<Movie> movieSpecification = MovieSpecification.containTextInMovieName(text);
+        System.out.println(text);
+        List<MovieReadDto> collect = movieRepository.findAll(movieSpecification).stream().map(MovieReadDto::new).collect(Collectors.toList());
+        return collect;
+
     }
 }

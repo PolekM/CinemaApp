@@ -51,4 +51,10 @@ public class MovieController {
     public ResponseEntity<String> updateMovie(@RequestBody MovieUpdateDto movieUpdateDto, @PathVariable Integer id){
         return movieService.updateMovie(movieUpdateDto,id);
     }
+
+    @GetMapping("/search")
+    public List<MovieReadDto> movieSearch(@RequestParam String text){
+        return movieService.movieSearch(text);
+
+    }
 }
