@@ -17,23 +17,10 @@ export class AppUserComponent implements OnInit{
     this.message ="";
   }
   ngOnInit(): void {
-    this.getTest();
   }
 
-  getTest(){
-    this.appUserService.getTest().subscribe(
-      (data) => {
-        // Handle successful response here
-        console.error(data);
-        this.message = data;
-      },
-      (error) => {
-        // Handle error here
-        console.error("blad");
-      }
-    );
     
-  }
+
 
 
 

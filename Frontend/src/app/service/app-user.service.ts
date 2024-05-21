@@ -7,12 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AppUserService {
 
- private url = 'http://localhost:8080/admin';
 
   constructor(private http: HttpClient) { }
 
-  getTest(): Observable<String>{
-    return this.http.get(`${this.url}`,{responseType: "text"});
-    
-  }
+
 }
