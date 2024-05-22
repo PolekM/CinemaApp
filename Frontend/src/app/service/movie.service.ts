@@ -18,7 +18,6 @@ export class MovieService {
   }
 
   public getMovieById(id:number): Observable<movieReadDto>{
-    console.error(`${this.baseUrl}`+'/'+ id) 
     return this.httpClient.get<movieReadDto>(`${this.baseUrl}`+'/'+ id)
   }
 }
