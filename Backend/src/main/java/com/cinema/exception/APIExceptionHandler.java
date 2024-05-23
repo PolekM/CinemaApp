@@ -23,135 +23,52 @@ import java.util.Date;
 @ControllerAdvice
 public class APIExceptionHandler {
 
-    //TODO - minimize code duplication
-    @ExceptionHandler(SpeciesNotFoundException.class)
-    public ResponseEntity<Error> handleSpeciesNotFoundException(SpeciesNotFoundException speciesNotFoundException) {
-
+    public ResponseEntity<Error> responseEntityExceptionBuilder(HttpStatus httpStatus, String massage) {
         Error error = new Error();
 
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMassage(speciesNotFoundException.getMessage());
+        error.setCode(httpStatus.value());
+        error.setMassage(massage);
         error.setErrorTime(new Date());
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, httpStatus);
 
     }
 
-    @ExceptionHandler({MovieNotFoundException.class})
-    public ResponseEntity<Error> handleMovieNotFoundException(MovieNotFoundException movieNotFoundException) {
+    @ExceptionHandler({
+            SpeciesNotFoundException.class,
+            MovieNotFoundException.class,
+            RoomNotFoundException.class,
+            SeanceNotFoundException.class,
+            ReservationStatusNotFoundException.class,
+            SeatNotFoundException.class,
+            ReservationNotFoundException.class
 
-        Error error = new Error();
 
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMassage(movieNotFoundException.getMessage());
-        error.setErrorTime(new Date());
+    })
+    public ResponseEntity<Error> handleNotFoundException(SpeciesNotFoundException exception) {
+        return responseEntityExceptionBuilder(HttpStatus.NOT_FOUND, exception.getMessage());
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(SpeciesDuplicateException.class)
-    public ResponseEntity<Error> handleSpeciesDuplicateException(SpeciesDuplicateException speciesDuplicateException) {
+    @ExceptionHandler({
+            SpeciesDuplicateException.class,
+            UserDuplicateException.class,
+            ReservedSeatException.class
 
-        Error error = new Error();
-
-        error.setCode(HttpStatus.CONFLICT.value());
-        error.setMassage(speciesDuplicateException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    })
+    public ResponseEntity<Error> handleConflictException(SpeciesDuplicateException exception) {
+        return responseEntityExceptionBuilder(HttpStatus.CONFLICT, exception.getMessage());
     }
 
-    @ExceptionHandler(RoomNotFoundException.class)
-    public ResponseEntity<Error> handleRoomNotFoundException(RoomNotFoundException roomNotFoundException) {
-
-        Error error = new Error();
-
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMassage(roomNotFoundException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    @ExceptionHandler({WrongPasswordException.class})
+    public ResponseEntity<Error> handleBadRequestException(WrongPasswordException exception) {
+        return responseEntityExceptionBuilder(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
-    @ExceptionHandler(SeanceNotFoundException.class)
-    public ResponseEntity<Error> handleSeanceNotFoundException(SeanceNotFoundException seanceNotFoundException) {
-
-        Error error = new Error();
-
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMassage(seanceNotFoundException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    @ExceptionHandler({WrongCredentialException.class})
+    public ResponseEntity<Error> handleUnauthorizedException(WrongCredentialException exception) {
+        return responseEntityExceptionBuilder(HttpStatus.UNAUTHORIZED, exception.getMessage());
     }
 
-    @ExceptionHandler(UserDuplicateException.class)
-    public ResponseEntity<Error> handleUserDuplicateException(UserDuplicateException userDuplicateException) {
-
-        Error error = new Error();
-
-        error.setCode(HttpStatus.CONFLICT.value());
-        error.setMassage(userDuplicateException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler(WrongPasswordException.class)
-    public ResponseEntity<Error> handleSeanceNotFoundException(WrongPasswordException wrongPasswordException) {
-
-        Error error = new Error();
-
-        error.setCode(HttpStatus.BAD_REQUEST.value());
-        error.setMassage(wrongPasswordException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
-    @ExceptionHandler(WrongCredentialException.class)
-    public ResponseEntity<Error> handleWrongCredentialException(WrongCredentialException wrongCredentialException) {
-
-        Error error = new Error();
-
-        error.setCode(HttpStatus.UNAUTHORIZED.value());
-        error.setMassage(wrongCredentialException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
-    }
-    @ExceptionHandler(ReservationStatusNotFoundException.class)
-    public ResponseEntity<Error> handleReservationStatusNotFoundException(ReservationStatusNotFoundException reservationStatusNotFoundException) {
-
-        Error error = new Error();
-
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMassage(reservationStatusNotFoundException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(SeatNotFoundException.class)
-    public ResponseEntity<Error> handleReservationStatusNotFoundException(SeatNotFoundException seatNotFoundException) {
-
-        Error error = new Error();
-
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMassage(seatNotFoundException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(ReservationNotFoundException.class)
-    public ResponseEntity<Error> handleReservationStatusNotFoundException(ReservationNotFoundException reservationNotFoundException) {
-
-        Error error = new Error();
-
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setMassage(reservationNotFoundException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(ReservedSeatException.class)
-    public ResponseEntity<Error> handleReservedSeatException(ReservedSeatException reservedSeatException){
-        Error error = new Error();
-
-        error.setCode(HttpStatus.CONFLICT.value());
-        error.setMassage(reservedSeatException.getMessage());
-        error.setErrorTime(new Date());
-        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-    }
 
 }
