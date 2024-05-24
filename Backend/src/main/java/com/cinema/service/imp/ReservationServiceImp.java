@@ -72,7 +72,7 @@ public class ReservationServiceImp implements ReservationService {
 
         for (Integer seatId : bookingSaveDto.getSeats()) {
             Seat seat = seatRepository.findById(seatId).orElseThrow(() -> new SeatNotFoundException("seat doesn't exist"));
-            if(allReservedSeatsBySeanceId.contains(seat)){
+            if (allReservedSeatsBySeanceId.contains(seat)) {
                 throw new ReservedSeatException("Seat is already taken");
             }
             ListOfSeatsId.add(new SeatBookingReadDto(seat));
@@ -101,10 +101,10 @@ public class ReservationServiceImp implements ReservationService {
     public ResponseEntity<String> payForReservation(Integer id) {
         AppUser currentUser = getCurrentUser();
         Reservation reservation = getReservation(id);
-        if(!currentUser.equals(reservation.getAppUser())){
+        if (!currentUser.equals(reservation.getAppUser())) {
             throw new WrongCredentialException("You can`t pay for not your reservation");
         }
-        if(!reservation.getReservationStatus().getStatusName().equals("UnPaid")){
+        if (!reservation.getReservationStatus().getStatusName().equals("UnPaid")) {
             throw new ReservedSeatException("Reservation is already Paid");
         }
         ReservationStatus reservationStatus = getReservationStatus("Paid");
@@ -119,12 +119,12 @@ public class ReservationServiceImp implements ReservationService {
     public ReservationUserDto getUserReservationById(Integer id) {
         AppUser appUser = getCurrentUser();
         Reservation reservation = getReservation(id);
-        if(!appUser.equals(reservation.getAppUser())){
+        if (!appUser.equals(reservation.getAppUser())) {
             throw new WrongCredentialException("Wrong User Credential");
         }
         List<SeatBookingReadDto> seats = reservationSeatRepository.findAllByReservation(reservation).stream().map(val -> new SeatBookingReadDto(val.getSeat())).toList();
 
-        return new ReservationUserDto(reservation,seats);
+        return new ReservationUserDto(reservation, seats);
     }
 
     public AppUser getCurrentUser() {

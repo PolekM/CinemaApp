@@ -1,6 +1,6 @@
 package com.cinema.exception.movie;
 
-public class MovieNotFoundException extends RuntimeException{
+public class MovieNotFoundException extends RuntimeException {
 
     public MovieNotFoundException(String message) {
         super(message);

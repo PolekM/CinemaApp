@@ -9,7 +9,7 @@ public class SpeciesReadDto {
     private Integer specieId;
     private String speciesName;
 
-    public SpeciesReadDto(Species species ) {
+    public SpeciesReadDto(Species species) {
         this.specieId = species.getSpecieId();
         this.speciesName = species.getSpeciesName();
     }

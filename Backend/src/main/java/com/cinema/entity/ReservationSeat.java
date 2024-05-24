@@ -26,8 +26,8 @@ public class ReservationSeat {
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
-    public ReservationSeat(Seat seat, Reservation reservation){
-        this.seat =seat;
+    public ReservationSeat(Seat seat, Reservation reservation) {
+        this.seat = seat;
         this.reservation = reservation;
     }
 }

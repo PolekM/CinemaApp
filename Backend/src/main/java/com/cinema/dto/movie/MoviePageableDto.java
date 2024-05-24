@@ -12,7 +12,7 @@ public class MoviePageableDto {
     private int totalPage;
     private long totalElements;
 
-    public MoviePageableDto(List<MovieReadDto> list, int currentPage,int totalPage, long totalElements){
+    public MoviePageableDto(List<MovieReadDto> list, int currentPage, int totalPage, long totalElements) {
         this.content = list;
         this.currentPage = currentPage;
         this.totalPage = totalPage;

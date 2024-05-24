@@ -21,7 +21,7 @@ public class Species {
     @Column(name = "name")
     private String speciesName;
 
-    public Species(SpeciesSaveDto speciesSaveDto){
+    public Species(SpeciesSaveDto speciesSaveDto) {
         this.speciesName = speciesSaveDto.getSpeciesName();
     }
 }

@@ -19,12 +19,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> createNewAccount(@RequestBody @Valid AuthSaveDto authSaveDto){
+    public ResponseEntity<String> createNewAccount(@RequestBody @Valid AuthSaveDto authSaveDto) {
         return authenticationService.createNewAccount(authSaveDto);
     }
 
     @PostMapping("/custom-login")
-    public ResponseEntity<String> loginToAccount(@RequestBody AuthLoginDto authLoginDto){
+    public ResponseEntity<String> loginToAccount(@RequestBody AuthLoginDto authLoginDto) {
         System.out.println(authLoginDto.getLogin());
         return authenticationService.loginToAccount(authLoginDto);
     }

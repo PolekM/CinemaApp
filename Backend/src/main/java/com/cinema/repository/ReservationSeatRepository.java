@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReservationSeatRepository  extends JpaRepository<ReservationSeat,Integer> {
+public interface ReservationSeatRepository extends JpaRepository<ReservationSeat, Integer> {
 
     List<ReservationSeat> findAllByReservation(Reservation reservation);
+
     List<ReservationSeat> findAllByReservationSeatId(Integer id);
 }

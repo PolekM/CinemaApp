@@ -26,34 +26,32 @@ public class MovieController {
     }
 
 
-
     @GetMapping()
     public MoviePageableDto getAllMovie(
-            @RequestParam(value = "pageNo",defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize",defaultValue = "8", required = false) int pageSize){
-        return movieService.getAllMovie(pageNo,pageSize);
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "8", required = false) int pageSize) {
+        return movieService.getAllMovie(pageNo, pageSize);
     }
 
 
     @GetMapping("/{id}")
-        public MovieReadDto getMovieById(@PathVariable(name = "id") int movieId){
-            return movieService.getMovieById(movieId);
-        }
-
+    public MovieReadDto getMovieById(@PathVariable(name = "id") int movieId) {
+        return movieService.getMovieById(movieId);
+    }
 
 
     @PostMapping("/add")
-    public ResponseEntity<String> addNewMovie(@RequestBody MovieSaveDto movieSaveDto){
+    public ResponseEntity<String> addNewMovie(@RequestBody MovieSaveDto movieSaveDto) {
         return movieService.addNewMovie(movieSaveDto);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateMovie(@RequestBody MovieUpdateDto movieUpdateDto, @PathVariable Integer id){
-        return movieService.updateMovie(movieUpdateDto,id);
+    public ResponseEntity<String> updateMovie(@RequestBody MovieUpdateDto movieUpdateDto, @PathVariable Integer id) {
+        return movieService.updateMovie(movieUpdateDto, id);
     }
 
     @GetMapping("/search")
-    public List<MovieReadDto> movieSearch(@RequestParam String text){
+    public List<MovieReadDto> movieSearch(@RequestParam String text) {
         return movieService.movieSearch(text);
 
     }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ReservationStatusRepository extends JpaRepository<ReservationStatus,Integer> {
+public interface ReservationStatusRepository extends JpaRepository<ReservationStatus, Integer> {
 
     Optional<ReservationStatus> findReservationStatusByStatusName(String name);
 }

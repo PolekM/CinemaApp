@@ -28,7 +28,7 @@ public class Movie {
     @JoinColumn(name = "species_id")
     private Species species;
 
-    public Movie(MovieSaveDto movieSaveDto, Species species){
+    public Movie(MovieSaveDto movieSaveDto, Species species) {
         this.title = movieSaveDto.getTitle();
         this.description = movieSaveDto.getDescription();
         this.yearOfProduction = movieSaveDto.getYearOfProduction();
@@ -36,10 +36,10 @@ public class Movie {
         this.movieUrl = movieSaveDto.getMovieUrl();
     }
 
-    public Movie UpdateMovie(MovieUpdateDto movieUpdateDto,Species species){
+    public Movie UpdateMovie(MovieUpdateDto movieUpdateDto, Species species) {
         this.title = movieUpdateDto.getTitle();
         this.description = movieUpdateDto.getDescription();
-        this.yearOfProduction =movieUpdateDto.getYearOfProduction();
+        this.yearOfProduction = movieUpdateDto.getYearOfProduction();
         this.species = species;
         this.movieUrl = movieUpdateDto.getMovieUrl();
 

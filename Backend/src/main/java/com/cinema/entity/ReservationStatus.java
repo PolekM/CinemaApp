@@ -16,11 +16,11 @@ public class ReservationStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="reservation_status_id")
+    @Column(name = "reservation_status_id")
     private Integer reservationStatusId;
     private String statusName;
 
-    public ReservationStatus(ReservationStatusSaveDto reservationStatusSaveDto){
+    public ReservationStatus(ReservationStatusSaveDto reservationStatusSaveDto) {
         this.statusName = reservationStatusSaveDto.getStatusName();
     }
 }

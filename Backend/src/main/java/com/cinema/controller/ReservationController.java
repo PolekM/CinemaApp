@@ -24,29 +24,30 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
-    public BookingReadDto getBookingData(@PathVariable Integer id){
+    public BookingReadDto getBookingData(@PathVariable Integer id) {
         return reservationService.getBookingData(id);
     }
 
     @PostMapping("/add")
-    public ReservationUserDto makeReservation(@RequestBody BookingSaveDto bookingSaveDto){
+    public ReservationUserDto makeReservation(@RequestBody BookingSaveDto bookingSaveDto) {
         return reservationService.makeReservation(bookingSaveDto);
 
     }
+
     @GetMapping("/user")
-    public List<ReservationUserDto> getAllUserReservation(){
+    public List<ReservationUserDto> getAllUserReservation() {
         return reservationService.getAllUserReservation();
     }
 
     @GetMapping("/user/{id}")
-    public ReservationUserDto getUserReservationById(@PathVariable Integer id){
+    public ReservationUserDto getUserReservationById(@PathVariable Integer id) {
         return reservationService.getUserReservationById(id);
 
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> payForReservation(@PathVariable Integer id){
+    public ResponseEntity<String> payForReservation(@PathVariable Integer id) {
         return reservationService.payForReservation(id);
     }
 }

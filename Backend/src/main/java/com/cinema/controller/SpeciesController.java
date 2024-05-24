@@ -22,17 +22,17 @@ public class SpeciesController {
     }
 
     @GetMapping()
-    public List<SpeciesReadDto> getAllSpecies(){
+    public List<SpeciesReadDto> getAllSpecies() {
         return speciesService.getAllSpecies();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addNewSpecies(@RequestBody SpeciesSaveDto speciesSaveDto){
+    public ResponseEntity<String> addNewSpecies(@RequestBody SpeciesSaveDto speciesSaveDto) {
         return speciesService.addNewSpecies(speciesSaveDto);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateSpecies(@RequestBody SpeciesSaveDto speciesSaveDto,@PathVariable Integer id){
-        return speciesService.updateSpecies(speciesSaveDto,id);
+    public ResponseEntity<String> updateSpecies(@RequestBody SpeciesSaveDto speciesSaveDto, @PathVariable Integer id) {
+        return speciesService.updateSpecies(speciesSaveDto, id);
     }
 }

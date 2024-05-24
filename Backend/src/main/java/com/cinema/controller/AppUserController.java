@@ -19,12 +19,12 @@ public class AppUserController {
     }
 
     @PostMapping("/change-password")
-    public ResponseEntity<String> changeUserPassword(@RequestBody ChangePasswordDto changePasswordDto){
-           return appUserService.changeUserPassword(changePasswordDto);
+    public ResponseEntity<String> changeUserPassword(@RequestBody ChangePasswordDto changePasswordDto) {
+        return appUserService.changeUserPassword(changePasswordDto);
     }
 
     @GetMapping("/data")
-    public UserReadDataDto getUserData(){
+    public UserReadDataDto getUserData() {
         return appUserService.getUserData();
     }
 }

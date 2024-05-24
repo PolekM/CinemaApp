@@ -10,7 +10,7 @@ public class SeatBookingReadDto {
     private Integer rowNumber;
     private Integer seatNumber;
 
-    public SeatBookingReadDto(Seat seat){
+    public SeatBookingReadDto(Seat seat) {
         this.seatId = seat.getSeatId();
         this.seatNumber = seat.getSeatNumber();
         this.rowNumber = seat.getRowNumber();

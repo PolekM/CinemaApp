@@ -47,18 +47,20 @@ public class SecurityConfig {
         provider.setUserDetailsService(customUserDetailService);
         return provider;
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("species/add","/species/update/**").hasRole("ADMIN")
-                        .requestMatchers("/movie/add","/movie/update/**").hasRole("ADMIN")
-                        .requestMatchers("/seance/add","/seance/update/**").hasRole("ADMIN")
-                        .requestMatchers("/species","/seance","/seance/date/**","/movie","/movie/{id}","/register","/login","custom-login","/user").permitAll()
+                        .requestMatchers("species/add", "/species/update/**").hasRole("ADMIN")
+                        .requestMatchers("/movie/add", "/movie/update/**").hasRole("ADMIN")
+                        .requestMatchers("/seance/add", "/seance/update/**").hasRole("ADMIN")
+                        .requestMatchers("/species", "/seance", "/seance/date/**", "/movie", "/movie/{id}", "/register", "/login", "custom-login", "/user").permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -69,6 +71,7 @@ public class SecurityConfig {
         http.addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

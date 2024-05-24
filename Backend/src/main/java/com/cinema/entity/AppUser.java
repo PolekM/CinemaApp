@@ -34,14 +34,14 @@ public class AppUser implements UserDetails {
     @JoinColumn(name = "user_role")
     private AppRole userRole;
 
-    public AppUser(AuthSaveDto authSaveDto){
-        this.login =authSaveDto.getLogin().toLowerCase();
+    public AppUser(AuthSaveDto authSaveDto) {
+        this.login = authSaveDto.getLogin().toLowerCase();
         this.password = authSaveDto.getPassword();
         this.email = authSaveDto.getEmail();
-        this.userRole = new AppRole(2,"ROLE_USER");
+        this.userRole = new AppRole(2, "ROLE_USER");
     }
 
-    public AppUser updateUserPassword(String updatedPassword){
+    public AppUser updateUserPassword(String updatedPassword) {
         this.password = updatedPassword;
         return this;
     }

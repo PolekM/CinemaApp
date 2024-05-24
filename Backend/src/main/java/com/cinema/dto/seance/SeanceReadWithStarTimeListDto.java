@@ -16,11 +16,11 @@ public class SeanceReadWithStarTimeListDto {
     private String movieUlr;
     List<SeanceStartTime> seanceStartTimeList = new ArrayList<>();
 
-    public SeanceReadWithStarTimeListDto(Seance seance){
+    public SeanceReadWithStarTimeListDto(Seance seance) {
         this.ticketCost = seance.getTicketCost();
-        this.room =  seance.getRoom().getRoomName();
+        this.room = seance.getRoom().getRoomName();
         this.movie = seance.getMovie().getTitle();
         this.movieUlr = seance.getMovie().getMovieUrl();
-        this.seanceStartTimeList.add(new SeanceStartTime(seance.getSeanceId(),seance.getStartTime()));
+        this.seanceStartTimeList.add(new SeanceStartTime(seance.getSeanceId(), seance.getStartTime()));
     }
 }

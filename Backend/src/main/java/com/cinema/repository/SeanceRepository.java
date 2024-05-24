@@ -9,9 +9,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface SeanceRepository extends JpaRepository<Seance,Integer> {
+public interface SeanceRepository extends JpaRepository<Seance, Integer> {
 
 
     @Query("select e from Seance e where CAST(e.startTime AS DATE) = :localDate and e.startTime > current_timestamp ")
-    List<Seance>findAllByDate(LocalDate localDate);
+    List<Seance> findAllByDate(LocalDate localDate);
 }

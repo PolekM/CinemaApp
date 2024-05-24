@@ -9,7 +9,7 @@ public class UserReadDataDto {
     private String username;
     private String email;
 
-    public UserReadDataDto(AppUser appUser){
+    public UserReadDataDto(AppUser appUser) {
         this.username = appUser.getUsername();
         this.email = appUser.getEmail();
     }

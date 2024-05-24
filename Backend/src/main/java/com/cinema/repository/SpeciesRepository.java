@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SpeciesRepository extends JpaRepository<Species,Integer> {
+public interface SpeciesRepository extends JpaRepository<Species, Integer> {
 
-     Optional<Species> findSpeciesBySpeciesName(String speciesName);
+    Optional<Species> findSpeciesBySpeciesName(String speciesName);
 
 }

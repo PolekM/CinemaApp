@@ -32,7 +32,7 @@ public class SpeciesServiceImp implements SpeciesService {
     @Override
     public ResponseEntity<String> addNewSpecies(SpeciesSaveDto speciesSaveDto) {
         Optional<Species> speciesBySpeciesName = speciesRepository.findSpeciesBySpeciesName(speciesSaveDto.getSpeciesName());
-        if(speciesBySpeciesName.isPresent()){
+        if (speciesBySpeciesName.isPresent()) {
             throw new SpeciesDuplicateException("The object is already in the database");
         }
         speciesRepository.save(new Species(speciesSaveDto));

@@ -22,7 +22,7 @@ public class ReservationUserDto {
     private String reservationStatus;
     private List<SeatBookingReadDto> reservedSeats;
 
-    public ReservationUserDto(Reservation reservation, List<SeatBookingReadDto> reservedSeats){
+    public ReservationUserDto(Reservation reservation, List<SeatBookingReadDto> reservedSeats) {
         this.reservationId = reservation.getReservationId();
         this.movieName = reservation.getSeance().getMovie().getTitle();
         this.ticketCost = reservation.getPrice();

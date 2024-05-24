@@ -44,7 +44,7 @@ public class MovieServiceImp implements MovieService {
         PageRequest pageable = PageRequest.of(pageNo, pageSize);
         Page<Movie> moviePage = movieRepository.findAll(pageable);
         List<MovieReadDto> collectMovie = moviePage.getContent().stream().map(MovieReadDto::new).collect(Collectors.toList());
-        return new MoviePageableDto(collectMovie,pageNo,moviePage.getTotalPages(),moviePage.getTotalElements());
+        return new MoviePageableDto(collectMovie, pageNo, moviePage.getTotalPages(), moviePage.getTotalElements());
 
     }
 

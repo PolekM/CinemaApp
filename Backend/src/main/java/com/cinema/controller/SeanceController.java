@@ -36,18 +36,18 @@ public class SeanceController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateSeance(@RequestBody SeanceSaveDto seanceSaveDto, @PathVariable Integer id){
-        return seanceService.updateSeance(seanceSaveDto,id);
+    public ResponseEntity<String> updateSeance(@RequestBody SeanceSaveDto seanceSaveDto, @PathVariable Integer id) {
+        return seanceService.updateSeance(seanceSaveDto, id);
     }
 
     @GetMapping("/date")
     public List<SeanceReadWithStarTimeListDto> getAllSeanceByDate(
-            @RequestParam(name = "date",required = false,defaultValue = "#{T(java.time.LocalDate).now()}") LocalDate localDate){
+            @RequestParam(name = "date", required = false, defaultValue = "#{T(java.time.LocalDate).now()}") LocalDate localDate) {
         return seanceService.getAllSeanceByDate(localDate);
     }
 
     @GetMapping("/{id}")
-    public SeanceReadDto getSeanceById(@PathVariable(name = "id") Integer id){
+    public SeanceReadDto getSeanceById(@PathVariable(name = "id") Integer id) {
         return seanceService.getSeanceById(id);
     }
 

@@ -24,8 +24,8 @@ public class BookingReadDto {
     private List<SeatBookingReadDto> seatsInRoom;
     private List<SeatBookingReadDto> seatsReservedInRoom;
 
-    public BookingReadDto(Seance seance, List<SeatBookingReadDto> allSeats, List<SeatBookingReadDto> reservedSeats){
-        this.seanceId =seance.getSeanceId();
+    public BookingReadDto(Seance seance, List<SeatBookingReadDto> allSeats, List<SeatBookingReadDto> reservedSeats) {
+        this.seanceId = seance.getSeanceId();
         this.ticketCost = seance.getTicketCost();
         this.startTime = seance.getStartTime();
         this.endTime = seance.getEndTime();
