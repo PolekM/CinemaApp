@@ -11,6 +11,7 @@ import { SeanceComponent } from './componets/seance/seance.component';
 import { ReservationComponent } from './componets/reservation/reservation.component';
 import { UserReservationComponent } from './componets/user-reservation/user-reservation.component';
 import { UserReservationDetailsComponent } from './componets/user-reservation-details/user-reservation-details.component';
+import { MovieSearchComponent } from './componets/movie-search/movie-search.component';
 
 export const routes: Routes = [
     { 
@@ -60,5 +61,9 @@ export const routes: Routes = [
         path: 'ticket/:id',
         component: UserReservationDetailsComponent,
         canActivate: [authGuard]
+    },
+    {
+        path: 'movie/search',
+        component: MovieSearchComponent,
     }
 ];
