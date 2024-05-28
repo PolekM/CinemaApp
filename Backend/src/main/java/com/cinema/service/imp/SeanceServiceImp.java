@@ -78,7 +78,6 @@ public class SeanceServiceImp implements SeanceService {
 
     @Override
     public List<SeanceReadWithStarTimeListDto> getAllSeanceByDate(LocalDate localDate) {
-        System.out.println(localDate);
         List<Seance> allSeanceByDate = seanceRepository.findAllByDate(localDate);
         HashMap<String, SeanceReadWithStarTimeListDto> hashMap = new HashMap<>();
         for (Seance seance : allSeanceByDate) {

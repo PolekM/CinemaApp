@@ -13,6 +13,10 @@ public class SeanceStartTime {
 
     public SeanceStartTime(Integer id, LocalDateTime startTime) {
         this.id = id;
-        this.startTime = startTime.getHour() + ":" + startTime.getMinute();
+        if(startTime.getMinute()<10)
+            this.startTime = startTime.getHour() + ":"+ "0" + startTime.getMinute();
+        else
+            this.startTime = startTime.getHour() + ":" + startTime.getMinute();
+
     }
 }
