@@ -23,9 +23,14 @@ export const routes: Routes = [
         component: MovieComponent
     },
     {
+        path: 'movie/search',
+          component: MovieSearchComponent
+    },
+    {
         path: 'movie/:id',
         component: MovieDetailsComponent
     },
+    
     {
         path: 'user', 
         component: AppUserComponent,
@@ -62,8 +67,5 @@ export const routes: Routes = [
         component: UserReservationDetailsComponent,
         canActivate: [authGuard]
     },
-    {
-        path: 'movie/search',
-        component: MovieSearchComponent,
-    }
+   
 ];

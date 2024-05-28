@@ -1,9 +1,20 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { movieReadDto } from '../entity/movieReadDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieSearchService {
 
-  constructor() { }
+  private baseUrl: String = "http://localhost:8080/movie/search"
+
+  constructor(private httpClient: HttpClient) { }
+
+  public searchMovie(query: string): Observable<movieReadDto[]>{
+    console.log(query)
+    const params = new HttpParams().set('text', query);
+    return this.httpClient.get<movieReadDto[]>(`${this.baseUrl}`, {params});
+  }
 }

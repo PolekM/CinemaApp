@@ -2,8 +2,20 @@
     <div class="row justify-content-end">
       <div class="col-lg-2 col-md-3 col-sm-3">
         <div class="form-group">
-          <input class="form-control">
+          <input class="form-control" placeholder="Search for a movie" [(ngModel)]="text">
         </div>
-      </div>
-        <div class="col-lg-2 col-md-3 col-sm-2" ><button type="submit" class="btn btn-primary">Submit</button></div>
-      </div>
+      </div >
+        <div class="col-lg-2 col-md-3 col-sm-2" ><button class="btn btn-primary" (click)="searchMovie(text)" >Search</button></div>
+    </div>
+      <div class="row ">
+     <div *ngFor="let m of searchedMovie" class="col-lg-3 col-md-6 d-flex justify-content-center">
+            <div class="card" style="width: 15rem;">
+              <img class="card-img-top" src={{m.movieUrl}} alt="Card image cap" height="350px">
+              <div class="card-body text-center">
+                <h5 class="card-title ">{{m.title}}</h5>
+                <p class="card-text">{{reducDescriptionSize(m.description)}}</p>
+                <a href="#" class="btn btn-primary" [routerLink]="['/movie',m.movieId]">read more</a>
+            </div>
+          </div>
+        </div>
+</div>
