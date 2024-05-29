@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AppUserService } from '../../service/app-user.service';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-app-user',
   standalone: true,
-  imports: [],
+  imports: [NgbModule],
   templateUrl: './app-user.component.html',
   styleUrl: './app-user.component.css'
 })
 export class AppUserComponent implements OnInit{
-[x: string]: any;
-  message: String 
-  constructor(private appUserService: AppUserService, private router:Router){
-    this.message ="";
+  constructor(private router:Router){
+
   }
   ngOnInit(): void {
   }
