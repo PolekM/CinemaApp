@@ -1,5 +1,6 @@
 package com.cinema.controller;
 
+import com.cinema.dto.seance.SeanceOnScreenDto;
 import com.cinema.dto.seance.SeanceReadDto;
 import com.cinema.dto.seance.SeanceReadWithStarTimeListDto;
 import com.cinema.dto.seance.SeanceSaveDto;
@@ -49,6 +50,11 @@ public class SeanceController {
     @GetMapping("/{id}")
     public SeanceReadDto getSeanceById(@PathVariable(name = "id") Integer id) {
         return seanceService.getSeanceById(id);
+    }
+
+    @GetMapping("/onScreen")
+    public List<SeanceOnScreenDto> getSeanceOnScreen(){
+        return seanceService.getSeanceOnScreen();
     }
 
 }

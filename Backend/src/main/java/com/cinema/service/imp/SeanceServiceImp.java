@@ -1,9 +1,6 @@
 package com.cinema.service.imp;
 
-import com.cinema.dto.seance.SeanceReadDto;
-import com.cinema.dto.seance.SeanceReadWithStarTimeListDto;
-import com.cinema.dto.seance.SeanceSaveDto;
-import com.cinema.dto.seance.SeanceStartTime;
+import com.cinema.dto.seance.*;
 import com.cinema.entity.Movie;
 import com.cinema.entity.Room;
 import com.cinema.entity.Seance;
@@ -108,5 +105,11 @@ public class SeanceServiceImp implements SeanceService {
                 .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
     }
 
-
+    @Override
+    public List<SeanceOnScreenDto> getSeanceOnScreen() {
+        return seanceRepository.findAllUniqueValue(LocalDate.now())
+                .stream()
+                .map(SeanceOnScreenDto::new)
+                .collect(Collectors.toList());
+    }
 }

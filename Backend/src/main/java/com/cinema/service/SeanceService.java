@@ -1,5 +1,6 @@
 package com.cinema.service;
 
+import com.cinema.dto.seance.SeanceOnScreenDto;
 import com.cinema.dto.seance.SeanceReadDto;
 import com.cinema.dto.seance.SeanceReadWithStarTimeListDto;
 import com.cinema.dto.seance.SeanceSaveDto;
@@ -19,4 +20,6 @@ public interface SeanceService {
     List<SeanceReadWithStarTimeListDto> getAllSeanceByDate(LocalDate localDate);
 
     SeanceReadDto getSeanceById(Integer id);
+
+    List<SeanceOnScreenDto>  getSeanceOnScreen();
 }
