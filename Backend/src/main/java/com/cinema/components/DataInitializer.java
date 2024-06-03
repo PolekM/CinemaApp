@@ -113,7 +113,7 @@ public class DataInitializer implements CommandLineRunner {
                 "Aquaman",
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                 2018,
-                "https://fwcdn.pl/fpo/61/14/826114/8102089.3.jpg",
+                "https://fwcdn.pl/fpo/61/14/826114/8102089_1.3.jpg",
                 speciesList.get(1)
         ));
         movieList.add(new Movie(
@@ -169,7 +169,7 @@ public class DataInitializer implements CommandLineRunner {
                 "Alien",
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                 1998,
-                "https://fwcdn.pl/fpo/82/43/8243/7517909.3.jpg",
+                "https://m.media-amazon.com/images/I/91uvgkhj88L._AC_UF1000,1000_QL80_.jpg",
                 speciesList.get(0)
         ));
         movieList.add(new Movie(
