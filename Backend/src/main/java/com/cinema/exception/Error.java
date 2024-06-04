@@ -8,6 +8,6 @@ import java.util.Date;
 public class Error {
 
     private Integer code;
-    private String massage;
-    private Date ErrorTime;
+    private String message;
+    private Date errorTime;
 }

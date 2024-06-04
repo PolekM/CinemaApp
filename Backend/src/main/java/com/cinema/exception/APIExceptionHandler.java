@@ -27,7 +27,7 @@ public class APIExceptionHandler {
         Error error = new Error();
 
         error.setCode(httpStatus.value());
-        error.setMassage(massage);
+        error.setMessage(massage);
         error.setErrorTime(new Date());
 
         return new ResponseEntity<>(error, httpStatus);
