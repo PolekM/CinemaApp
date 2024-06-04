@@ -25,6 +25,16 @@
             <h2>Current on the screen</h2>
         </div>
     </div>
+    <div class="row justify-content-center" >
+        <ng-container *ngFor="let s of seanceOnScreen" >
+            <div class="col-lg-2 col-md-4 col-sm-4 ">
+                <figure class="figure">
+                    <img src={{s.movieUrl}} class="figure-img img-fluid rounded" alt="...">
+                    <figcaption class="figure-caption text-center">{{s.title}}</figcaption>
+                </figure>
+            </div>
+        </ng-container>
 
+    </div>
 </div>
 
