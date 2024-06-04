@@ -12,6 +12,7 @@ import { ReservationComponent } from './componets/reservation/reservation.compon
 import { UserReservationComponent } from './componets/user-reservation/user-reservation.component';
 import { UserReservationDetailsComponent } from './componets/user-reservation-details/user-reservation-details.component';
 import { MovieSearchComponent } from './componets/movie-search/movie-search.component';
+import { NotFoundComponent } from './componets/not-found/not-found.component';
 
 export const routes: Routes = [
     { 
@@ -67,5 +68,9 @@ export const routes: Routes = [
         component: UserReservationDetailsComponent,
         canActivate: [authGuard]
     },
+    {
+        path:'not-found',
+        component: NotFoundComponent
+    }
    
 ];
