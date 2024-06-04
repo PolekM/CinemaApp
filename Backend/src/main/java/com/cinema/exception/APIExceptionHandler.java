@@ -45,7 +45,7 @@ public class APIExceptionHandler {
 
 
     })
-    public ResponseEntity<Error> handleNotFoundException(SpeciesNotFoundException exception) {
+    public ResponseEntity<Error> handleNotFoundException(Exception exception) {
         return responseEntityExceptionBuilder(HttpStatus.NOT_FOUND, exception.getMessage());
 
     }
@@ -56,17 +56,17 @@ public class APIExceptionHandler {
             ReservedSeatException.class
 
     })
-    public ResponseEntity<Error> handleConflictException(SpeciesDuplicateException exception) {
+    public ResponseEntity<Error> handleConflictException(Exception exception) {
         return responseEntityExceptionBuilder(HttpStatus.CONFLICT, exception.getMessage());
     }
 
     @ExceptionHandler({WrongPasswordException.class})
-    public ResponseEntity<Error> handleBadRequestException(WrongPasswordException exception) {
+    public ResponseEntity<Error> handleBadRequestException(Exception exception) {
         return responseEntityExceptionBuilder(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler({WrongCredentialException.class})
-    public ResponseEntity<Error> handleUnauthorizedException(WrongCredentialException exception) {
+    public ResponseEntity<Error> handleUnauthorizedException(Exception exception) {
         return responseEntityExceptionBuilder(HttpStatus.UNAUTHORIZED, exception.getMessage());
     }
 
