@@ -5,6 +5,7 @@ import com.cinema.entity.Movie;
 import com.cinema.entity.Room;
 import com.cinema.entity.Seance;
 import com.cinema.exception.movie.MovieNotFoundException;
+import com.cinema.exception.room.RoomIsBusyException;
 import com.cinema.exception.room.RoomNotFoundException;
 import com.cinema.exception.seance.SeanceNotFoundException;
 import com.cinema.repository.MovieRepository;
@@ -50,10 +51,11 @@ public class SeanceServiceImp implements SeanceService {
     @Transactional
     @Override
     public ResponseEntity<String> addNewSeance(SeanceSaveDto seanceSaveDto) {
-        //ToDo - create conditional instructions to disallow create seance when room will be busy
         Room room = getRoomById(seanceSaveDto.getRoomId());
         Movie movie = getMovieById(seanceSaveDto.getMovieId());
-
+        if (!checkIfRoomIsBusy(seanceSaveDto))
+            throw new RoomIsBusyException("Room is Busy");
+        //ToDo - create conditional instructions to disallow create seance when room will be busy
         seanceRepository.save(new Seance(seanceSaveDto, movie, room));
         log.info("Object added correctly");
         return new ResponseEntity<>("Object added correctly", HttpStatus.OK);
@@ -62,11 +64,13 @@ public class SeanceServiceImp implements SeanceService {
     @Transactional
     @Override
     public ResponseEntity<String> updateSeance(SeanceSaveDto seanceSaveDto, Integer id) {
-        //ToDo - create conditional instructions to disallow create seance when room will be busy
         Seance seance = seanceRepository.findById(id).
                 orElseThrow(() -> new SeanceNotFoundException("Seance doesn't exist"));
         Room room = getRoomById(seanceSaveDto.getRoomId());
         Movie movie = getMovieById(seanceSaveDto.getMovieId());
+        if (!checkIfRoomIsBusy(seanceSaveDto))
+            throw new RoomIsBusyException("Room is Busy");
+        //ToDo - create conditional instructions to disallow create seance when room will be busy
         seance.updateSeance(seanceSaveDto, movie, room);
 
         log.info("Object updated correctly");
@@ -111,5 +115,12 @@ public class SeanceServiceImp implements SeanceService {
                 .stream()
                 .map(SeanceOnScreenDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public boolean checkIfRoomIsBusy(SeanceSaveDto seanceSaveDto) {
+        return seanceRepository.findRoomByStartAndEndTime(
+                seanceSaveDto.getStartTime(),
+                seanceSaveDto.getEndTime(),
+                seanceSaveDto.getRoomId()).isEmpty();
     }
 }

@@ -7,6 +7,7 @@ import com.cinema.exception.movie.MovieNotFoundException;
 import com.cinema.exception.reservation.ReservationNotFoundException;
 import com.cinema.exception.reservation.ReservedSeatException;
 import com.cinema.exception.reservationStatus.ReservationStatusNotFoundException;
+import com.cinema.exception.room.RoomIsBusyException;
 import com.cinema.exception.room.RoomNotFoundException;
 import com.cinema.exception.seance.SeanceNotFoundException;
 import com.cinema.exception.seat.SeatNotFoundException;
@@ -53,7 +54,8 @@ public class APIExceptionHandler {
     @ExceptionHandler({
             SpeciesDuplicateException.class,
             UserDuplicateException.class,
-            ReservedSeatException.class
+            ReservedSeatException.class,
+            RoomIsBusyException.class
 
     })
     public ResponseEntity<Error> handleConflictException(Exception exception) {
