@@ -10,9 +10,9 @@
       <!-- Login Form -->
       <form (ngSubmit)="registerUser()">
         <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [(ngModel)] ="registerSaveDto.login">
-        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" [(ngModel)] ="registerSaveDto.password">
-        <input type="password" id="password" class="fadeIn third" name="password" placeholder="reapet password"[(ngModel)] ="registerSaveDto.repeatPassword">
-        <input type="text" id="password" class="fadeIn third" name="email" placeholder="email"[(ngModel)] ="registerSaveDto.email">
+        <input type="password" class="fadeIn third" name="password" placeholder="password" [(ngModel)] ="registerSaveDto.password">
+        <input type="password" class="fadeIn third" name="password" placeholder="reapet password"[(ngModel)] ="registerSaveDto.repeatPassword">
+        <input type="text" class="fadeIn third" name="email" placeholder="email"[(ngModel)] ="registerSaveDto.email">
         <input type="submit" class="fadeIn fourth" value="Register">
       </form>
   
