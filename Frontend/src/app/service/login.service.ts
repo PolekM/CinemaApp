@@ -33,7 +33,6 @@ import { Router } from '@angular/router';
             localStorage.setItem('authorization',authString);
             localStorage.setItem('userRole',response);
             this.isLoginSubject.next(true);
-            console.log("login: "+this.isLoginSubject.getValue)
             this.router.navigateByUrl('/movie');
           },
           error => {
