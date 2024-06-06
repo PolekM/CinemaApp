@@ -22,4 +22,6 @@ public interface SeanceService {
     SeanceReadDto getSeanceById(Integer id);
 
     List<SeanceOnScreenDto>  getSeanceOnScreen();
+
+    SeanceReadWithStarTimeListDto getNearestSeance(Integer id);
 }

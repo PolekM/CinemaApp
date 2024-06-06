@@ -22,5 +22,8 @@ public interface SeanceRepository extends JpaRepository<Seance, Integer> {
     List<Movie> findAllUniqueValue(LocalDate localDate);
 
     @Query("select s from Seance s where s.room.roomId = :roomId and :startTime< s.endTime and :endTime > s.startTime")
-    public List<Seance> findRoomByStartAndEndTime(LocalDateTime startTime, LocalDateTime endTime, Integer roomId);
+    List<Seance> findRoomByStartAndEndTime(LocalDateTime startTime, LocalDateTime endTime, Integer roomId);
+
+    @Query("select s from Seance s where s.movie.movieId = :movieId and s.startTime> current_timestamp and CAST(s.startTime AS DATE)=local date")
+    List<Seance> findNearestScreeningMovieById(Integer movieId);
 }

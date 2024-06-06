@@ -98,6 +98,28 @@ public class SeanceServiceImp implements SeanceService {
         Seance seance = seanceRepository.findById(id).orElseThrow(() -> new SeanceNotFoundException("Seance dosen't exist"));
         return new SeanceReadDto(seance);
     }
+    @Override
+    public List<SeanceOnScreenDto> getSeanceOnScreen() {
+        return seanceRepository.findAllUniqueValue(LocalDate.now())
+                .stream()
+                .map(SeanceOnScreenDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public SeanceReadWithStarTimeListDto getNearestSeance(Integer id) {
+        List<Seance> nearestScreening = seanceRepository.findNearestScreeningMovieById(id);
+        if(nearestScreening.isEmpty()){
+            return new SeanceReadWithStarTimeListDto();
+        }
+        SeanceReadWithStarTimeListDto seanceDto = new SeanceReadWithStarTimeListDto(nearestScreening.get(0));
+        nearestScreening.stream()
+                .skip(1)
+                .map(seance -> new SeanceStartTime(seance.getSeanceId(),seance.getStartTime()))
+                .forEach(seanceStartTime -> seanceDto.getSeanceStartTimeList().add(seanceStartTime));
+        
+        return  seanceDto;
+    }
 
     private Room getRoomById(Integer roomId) {
         return roomRepository.findById(roomId)
@@ -107,14 +129,6 @@ public class SeanceServiceImp implements SeanceService {
     private Movie getMovieById(Integer movieId) {
         return movieRepository.findById(movieId)
                 .orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
-    }
-
-    @Override
-    public List<SeanceOnScreenDto> getSeanceOnScreen() {
-        return seanceRepository.findAllUniqueValue(LocalDate.now())
-                .stream()
-                .map(SeanceOnScreenDto::new)
-                .collect(Collectors.toList());
     }
 
     public boolean checkIfRoomIsBusy(SeanceSaveDto seanceSaveDto) {

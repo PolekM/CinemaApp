@@ -23,4 +23,7 @@ public class SeanceReadWithStarTimeListDto {
         this.movieUlr = seance.getMovie().getMovieUrl();
         this.seanceStartTimeList.add(new SeanceStartTime(seance.getSeanceId(), seance.getStartTime()));
     }
+
+    public SeanceReadWithStarTimeListDto() {
+    }
 }

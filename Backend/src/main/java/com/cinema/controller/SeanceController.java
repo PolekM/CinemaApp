@@ -57,6 +57,10 @@ public class SeanceController {
         return seanceService.getSeanceOnScreen();
     }
 
+    @GetMapping("/nearest/movie/{id}")
+    public SeanceReadWithStarTimeListDto getNearestSeance(@PathVariable(name="id") Integer id){
+        return seanceService.getNearestSeance(id);
+    }
 }
 
 
