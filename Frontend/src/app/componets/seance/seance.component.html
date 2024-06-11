@@ -1,19 +1,6 @@
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
+
 <div class="container text-center">
-  <div class="row align-items-center">
-    <div class="col-lg-4 col-md-4 col-sm-3 text-end">
-      <button type="button" class="btn btn-primary" [class.disabled]="currentDate === getCurrentDate()" (click)="changeDate(-1)" >
-        <i class="fas fa-arrow-left customArrow"></i>
-      </button>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-6"> <h1>Seance {{currentDate}}</h1> </div>
-    <div class="col-lg-4 col-md-4 col-sm-3 text-start "> 
-      <button type="button" class="btn btn-primary" (click)="changeDate(1)" >
-        <i class="fas fa-arrow-right customArrow"></i>
-    </button></div>
-  </div>
+  <app-date-picker (dateChange)="onDateChange($event)"></app-date-picker>
 
     <div class="row ">
     
