@@ -1,0 +1,13 @@
+<div class="row ">
+    
+    <div *ngFor="let s of seances" class="col-lg-12 col-md-12 d-flex justify-content-center">
+     
+        <div class="card" style="width: 14rem;">
+          <img class="card-img-top" src={{s.movieUlr}} alt="Card image cap" height="300px">
+          <div  class="card-body text-center">
+            <h5 class="card-title ">{{s.movie}}</h5>
+            <a *ngFor="let time of s.seanceStartTimeList" class="btn btn-primary" [routerLink]="['/reservation',time.id]">{{time.startTime}}</a>
+        </div>
+      </div>
+    </div>
+  </div>

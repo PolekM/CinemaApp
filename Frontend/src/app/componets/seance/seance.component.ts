@@ -5,35 +5,26 @@ import { SeanceReadWithStartTimeListDto } from '../../entity/SeanceReadWithStart
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
 import { RouterModule } from '@angular/router';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
+import { SeanceListComponent } from '../seance-list/seance-list.component';
 
 
 @Component({
   selector: 'app-seance',
   standalone: true,
-  imports: [CommonModule,RouterModule,MovieDetailsComponent,DatePickerComponent],
+  imports: [CommonModule,RouterModule,MovieDetailsComponent,DatePickerComponent, SeanceListComponent],
   templateUrl: './seance.component.html',
   styleUrl: './seance.component.css'
 })
-export class SeanceComponent implements OnInit{
-
- 
+export class SeanceComponent{
   
-  seanceByDate: SeanceReadWithStartTimeListDto[] = []
-  constructor(private seanceService: SeanceService, private datePipe: DatePipe){
-  
+  selectedDate: string
+  constructor(){
+    this.selectedDate = new Date().toISOString().split('T')[0];
     
   }
-  ngOnInit(): void {
-    this.getSeanceByDate(new Date().toISOString().split('T')[0]);
-  
-  }
 
-  getSeanceByDate(date:String){
-    this.seanceService.getSeanceByDate(date).subscribe(data =>{this.seanceByDate = data})
-  }
-
-  onDateChange(date: String) {
-    this.getSeanceByDate(date);
+  onDateChange(date: string) {
+    this.selectedDate = date;
   }
   
 }

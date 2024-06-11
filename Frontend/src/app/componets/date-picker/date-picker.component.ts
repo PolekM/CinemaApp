@@ -10,14 +10,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class DatePickerComponent {
 
-  @Output() dateChange: EventEmitter<String> = new EventEmitter<String>();
-  currentDate:String
+  @Output() dateChange: EventEmitter<string> = new EventEmitter<string>();
+  currentDate:string
 
   constructor(private datePipe: DatePipe){
     this.currentDate = this.getCurrentDate();
   }
 
-  getCurrentDate(): String{
+  getCurrentDate(): string{
     const currentDate = new Date();
     const formattedDate = this.datePipe.transform(currentDate, 'YYYY-MM-dd') || '';
     return formattedDate
