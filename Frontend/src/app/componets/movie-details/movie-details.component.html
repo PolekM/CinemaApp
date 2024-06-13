@@ -3,11 +3,19 @@
     <div class="col-lg-3 col-md-4">
       <img src="{{movie.movieUrl}}" class="rounded mx-auto d-block" alt="...">
     </div>
-    <div class="col-lg-7 col-md-8">
+    <div class="col-lg-7 col-md-7">
       <h2 class ="text-md-start text-center">{{movie.title}}</h2>
       <p class ="text-md-start text-center"><b>description: </b>{{movie.description}}</p>
       <p class ="text-md-start text-center"><b>Species:</b> {{movie.speciesName}}</p>
       <p class ="text-md-start text-center"><b>Year Of Production:</b> {{movie.yearOfProduction}}</p>
+      <p class ="text-md-start text-center"><b>Nearest Seances: </b>
+      @if (nearestSeance !=undefined) {
+        @for (time of nearestSeance.seanceStartTimeList; track $index) {
+          <a class="btn btn-primary" [routerLink]="['/reservation',time.id]">{{time.startTime}}</a>
+          }
+      }
+      @else { <p>Movie has no upcoming screenings</p> }
+    </p>
     </div>
   </div>
 </div>

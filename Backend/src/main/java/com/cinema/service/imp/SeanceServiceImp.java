@@ -110,7 +110,7 @@ public class SeanceServiceImp implements SeanceService {
     public SeanceReadWithStarTimeListDto getNearestSeance(Integer id) {
         List<Seance> nearestScreening = seanceRepository.findNearestScreeningMovieById(id);
         if(nearestScreening.isEmpty()){
-            return new SeanceReadWithStarTimeListDto();
+            throw new SeanceNotFoundException("Movie has no upcoming screenings");
         }
         SeanceReadWithStarTimeListDto seanceDto = new SeanceReadWithStarTimeListDto(nearestScreening.get(0));
         nearestScreening.stream()

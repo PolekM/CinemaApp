@@ -18,9 +18,12 @@ export class SeanceService {
   public getSeanceByDate(date: String): Observable<SeanceReadWithStartTimeListDto[]>{
     return this.httpClient.get<SeanceReadWithStartTimeListDto[]>(`${this.baseUrl}`+'date'+'?date='+date)
   }
-public getSeanceById(id: number){
-  return this.httpClient.get<seanceReadDto>(`${this.baseUrl}`+id)
-}
- 
+  public getSeanceById(id: number){
+    return this.httpClient.get<seanceReadDto>(`${this.baseUrl}`+id)
+  }
+
+  public getNearestSeance(id:number): Observable<SeanceReadWithStartTimeListDto>{
+    return this.httpClient.get<SeanceReadWithStartTimeListDto>(`${this.baseUrl}`+'nearest/movie/'+id)
+  }
 
 }
