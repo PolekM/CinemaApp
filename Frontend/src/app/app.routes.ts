@@ -13,6 +13,7 @@ import { UserReservationComponent } from './componets/user-reservation/user-rese
 import { UserReservationDetailsComponent } from './componets/user-reservation-details/user-reservation-details.component';
 import { MovieSearchComponent } from './componets/movie-search/movie-search.component';
 import { NotFoundComponent } from './componets/not-found/not-found.component';
+import { UserProfileComponent } from './componets/user-profile/user-profile.component';
 
 export const routes: Routes = [
     { 
@@ -37,6 +38,10 @@ export const routes: Routes = [
         component: AppUserComponent,
         canActivate: [authGuard,authRoleGuard],
             data: {role: 'ROLE_ADMIN'}
+     },
+     {path:'profile',
+        component: UserProfileComponent,
+        canActivate:[authGuard]
      },
     {
         path: 'login',
@@ -71,6 +76,6 @@ export const routes: Routes = [
     {
         path:'not-found',
         component: NotFoundComponent
-    }
+    },
    
 ];
