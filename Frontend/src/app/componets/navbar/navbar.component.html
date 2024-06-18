@@ -13,8 +13,7 @@
           <div *ngIf="(isLoggedIn | async)"  ngbDropdown class="d-inline-block" >
             <button  class="nav-link" id="dropdown" ngbDropdownToggle type="button">Account</button> 
             <div ngbDropdownMenu aria-labelledby="dropdown" placement="bottom-right">
-              <button ngbDropdownItem>Profile</button> 
-              <button ngbDropdownItem>Edit profile</button> 
+              <button ngbDropdownItem routerLink="/profile">Profile</button> 
               <button ngbDropdownItem routerLink="/ticket">My Ticket</button>
               <div class="dropdown-divider"></div> 
               <button ngbDropdownItem (click)="logoutUser()">Logout</button> 
