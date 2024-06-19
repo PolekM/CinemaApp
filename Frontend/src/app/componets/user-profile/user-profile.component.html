@@ -1,14 +1,34 @@
-<div class="container ">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-2">
+        <div class="col-lg-2 col-md-3, col-sm-4">
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" class="rounded" alt="...">
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-3 col-sm-3">
             <p>Email: {{user.email}}</p>
             <p>user name: {{user.username}}</p>
         </div>
     </div>
     <div class="row justify-content-center">
         <hr class="col-lg-7 hr hr-blurry" />
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <h2> Change Password</h2>
+            <form (submit)="changePassword()">
+                <div class="form-group">
+                    <label for="Password">Old Password</label>
+                    <input type="password" class="form-control" placeholder="Old Password" [(ngModel)] ="changePasswordDto.oldPassword" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="form-group">
+                    <label for="Password">New Password</label>
+                    <input type="password" class="form-control" placeholder="New Password" [(ngModel)] ="changePasswordDto.newPassword" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="form-group">
+                    <label for="Password">Repeat New Password</label>
+                    <input type="password" class="form-control" placeholder="Repeat New Password" [(ngModel)] ="changePasswordDto.repeatNewPassword" [ngModelOptions]="{standalone: true}">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
 </div>
