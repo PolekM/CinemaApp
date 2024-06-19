@@ -3,6 +3,8 @@ import { UserReadDto } from '../../entity/UserReadDto';
 import { UserProfileService } from '../../service/user-profile.service';
 import { ChangePasswordDto } from '../../entity/ChangePasswordDto';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,7 +19,7 @@ export class UserProfileComponent implements OnInit {
   changePasswordDto: ChangePasswordDto = {} as ChangePasswordDto
   message: string =''
 
-  constructor(private userProfileService: UserProfileService){
+  constructor(private userProfileService: UserProfileService, private loginService: LoginService){
 
   }
   ngOnInit(): void {
@@ -28,7 +30,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   changePassword(){
-    this.userProfileService.changePassword(this.changePasswordDto).subscribe(Response => this.message = Response)
+    this.userProfileService.changePassword(this.changePasswordDto).subscribe(Response => 
+      {
+      this.message = Response
+      this.loginService.logoutUser()
+    })
   }
   
 }
