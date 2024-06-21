@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
     constructor(private http: HttpClient, private router: Router) { }
 
     isLoginSubject = new BehaviorSubject<Boolean>(this.hasToken())
+    isAdminSubject = new BehaviorSubject<Boolean>(this.isAdmin())
 
     authUser(loginWriteDto: loginWriteDto){
       const headers = new HttpHeaders(
@@ -33,6 +34,9 @@ import { Router } from '@angular/router';
             localStorage.setItem('authorization',authString);
             localStorage.setItem('userRole',response);
             this.isLoginSubject.next(true);
+            if(response ==="ROLE_ADMIN"){
+              this.isAdminSubject.next(true);
+            }
             this.router.navigateByUrl('/movie');
           },
           error => {
@@ -46,13 +50,19 @@ import { Router } from '@angular/router';
       localStorage.removeItem('authorization');
       localStorage.removeItem('userRole');  
       this.isLoginSubject.next(false);
+      this.isAdminSubject.next(false);
       this.router.navigate(['/login']);
     }
 
     hasToken(): Boolean{
       return localStorage.getItem('authorization')==null? false:true;
     }
-    
+    isAdmin(): Boolean{
+      return localStorage.getItem('userRole')!=="ROLE_ADMIN"? false:true;
+    }
+    isLoggedAsAdmin() : Observable<Boolean> {
+      return this.isAdminSubject.asObservable();
+    }
     isLoggedIn() : Observable<Boolean> {
       return this.isLoginSubject.asObservable();
     }

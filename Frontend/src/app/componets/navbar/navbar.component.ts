@@ -20,10 +20,12 @@ import { Router, RouterModule } from '@angular/router';
 export class NavbarComponent{
 
   isLoggedIn : Observable<Boolean>;
+  isAdmin: Observable<Boolean>;
   isNavbarCollapsed = true;
 
   constructor(private loginService: LoginService){
     this.isLoggedIn = loginService.isLoggedIn()
+    this.isAdmin = loginService.isLoggedAsAdmin()
   }
 
 

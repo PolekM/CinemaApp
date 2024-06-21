@@ -15,6 +15,7 @@
             <div ngbDropdownMenu aria-labelledby="dropdown" placement="bottom-right">
               <button ngbDropdownItem routerLink="/profile">Profile</button> 
               <button ngbDropdownItem routerLink="/ticket">My Ticket</button>
+              <button *ngIf="(isAdmin | async)" ngbDropdownItem routerLink="/admin">Admin Panel</button>
               <div class="dropdown-divider"></div> 
               <button ngbDropdownItem (click)="logoutUser()">Logout</button> 
             </div> 

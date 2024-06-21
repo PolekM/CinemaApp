@@ -14,6 +14,7 @@ import { UserReservationDetailsComponent } from './componets/user-reservation-de
 import { MovieSearchComponent } from './componets/movie-search/movie-search.component';
 import { NotFoundComponent } from './componets/not-found/not-found.component';
 import { UserProfileComponent } from './componets/user-profile/user-profile.component';
+import { AdminPanelComponent } from './componets/admin-panel/admin-panel.component';
 
 export const routes: Routes = [
     { 
@@ -32,12 +33,12 @@ export const routes: Routes = [
         path: 'movie/:id',
         component: MovieDetailsComponent
     },
-    
-    {
-        path: 'user', 
-        component: AppUserComponent,
-        canActivate: [authGuard,authRoleGuard],
+     {
+        path: 'admin',
+        component: AdminPanelComponent,
+        canActivate: [authGuard, authRoleGuard],
             data: {role: 'ROLE_ADMIN'}
+
      },
      {path:'profile',
         component: UserProfileComponent,
