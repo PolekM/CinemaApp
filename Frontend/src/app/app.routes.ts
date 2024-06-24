@@ -15,6 +15,9 @@ import { MovieSearchComponent } from './componets/movie-search/movie-search.comp
 import { NotFoundComponent } from './componets/not-found/not-found.component';
 import { UserProfileComponent } from './componets/user-profile/user-profile.component';
 import { AdminPanelComponent } from './componets/admin-panel/admin-panel.component';
+import { AdminPanelSeanceComponent } from './componets/admin-panel-seance/admin-panel-seance.component';
+import { AdminPanelMovieComponent } from './componets/admin-panel-movie/admin-panel-movie.component';
+import { AdminPanelUserComponent } from './componets/admin-panel-user/admin-panel-user.component';
 
 export const routes: Routes = [
     { 
@@ -40,6 +43,25 @@ export const routes: Routes = [
             data: {role: 'ROLE_ADMIN'}
 
      },
+     {
+        path: 'admin-seance',
+        component: AdminPanelSeanceComponent,
+        canActivate: [authGuard, authRoleGuard],
+            data: {role: 'ROLE_ADMIN'}
+     },
+     {
+        path: 'admin-movie',
+        component: AdminPanelMovieComponent,
+        canActivate: [authGuard, authRoleGuard],
+            data: {role: 'ROLE_ADMIN'}
+     },
+     {
+        path: 'admin-user',
+        component: AdminPanelUserComponent,
+        canActivate: [authGuard, authRoleGuard],
+            data: {role: 'ROLE_ADMIN'}
+     },
+     
      {path:'profile',
         component: UserProfileComponent,
         canActivate:[authGuard]
