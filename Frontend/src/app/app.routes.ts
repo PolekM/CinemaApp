@@ -24,78 +24,70 @@ export const routes: Routes = [
         path:  '', 
         component: AppUserComponent
     },
+
     {
         path: 'movie', 
         component: MovieComponent
     },
+
     {
         path: 'movie/search',
           component: MovieSearchComponent
     },
+
     {
         path: 'movie/:id',
         component: MovieDetailsComponent
     },
-     {
+
+    {
         path: 'admin',
         component: AdminPanelComponent,
         canActivate: [authGuard, authRoleGuard],
             data: {role: 'ROLE_ADMIN'}
+    },
 
-     },
-     {
-        path: 'admin-seance',
-        component: AdminPanelSeanceComponent,
-        canActivate: [authGuard, authRoleGuard],
-            data: {role: 'ROLE_ADMIN'}
-     },
-     {
-        path: 'admin-movie',
-        component: AdminPanelMovieComponent,
-        canActivate: [authGuard, authRoleGuard],
-            data: {role: 'ROLE_ADMIN'}
-     },
-     {
-        path: 'admin-user',
-        component: AdminPanelUserComponent,
-        canActivate: [authGuard, authRoleGuard],
-            data: {role: 'ROLE_ADMIN'}
-     },
-     
-     {path:'profile',
+    {path:'profile',
         component: UserProfileComponent,
         canActivate:[authGuard]
-     },
+    },
+
     {
         path: 'login',
         component: LoginComponent,
         canActivate: [loginAccessGuard]
-     },
+    },
+
     {
         path: 'register',
         component: RegisterComponent,
         canActivate: [loginAccessGuard]
     },
+
     {
         path: 'seance',
         component: SeanceComponent,
         
     },
+
     {
         path: 'reservation/:id',
         component: ReservationComponent,
         canActivate: [authGuard]
     },
+
     {
         path: 'ticket',
         component: UserReservationComponent,
         canActivate: [authGuard]
     },
+
     {
         path: 'ticket/:id',
         component: UserReservationDetailsComponent,
         canActivate: [authGuard]
     },
+
     {
         path:'not-found',
         component: NotFoundComponent
