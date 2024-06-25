@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MoviePageableDto } from '../../entity/MoviePageableDto';
+import { AdminProfileService } from '../../service/admin-profile.service';
 
 @Component({
   selector: 'app-admin-panel-movie',
@@ -7,6 +9,19 @@ import { Component } from '@angular/core';
   templateUrl: './admin-panel-movie.component.html',
   styleUrl: './admin-panel-movie.component.css'
 })
-export class AdminPanelMovieComponent {
+export class AdminPanelMovieComponent implements OnInit {
+
+  movies: MoviePageableDto = {} as MoviePageableDto;
+
+  constructor(private adminService: AdminProfileService){
+
+  }
+  ngOnInit(): void {
+    this.getAllMovie(0);
+  }
+
+  getAllMovie(pageNo: number){
+    this.adminService.getAllMovie(pageNo).subscribe(Response =>{this.movies = Response})
+  }
 
 }

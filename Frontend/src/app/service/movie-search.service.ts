@@ -13,7 +13,6 @@ export class MovieSearchService {
   constructor(private httpClient: HttpClient) { }
 
   public searchMovie(query: string): Observable<movieReadDto[]>{
-    console.log(query)
     const params = new HttpParams().set('text', query);
     return this.httpClient.get<movieReadDto[]>(`${this.baseUrl}`, {params});
   }
