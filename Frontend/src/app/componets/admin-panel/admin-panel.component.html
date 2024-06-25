@@ -1,21 +1,14 @@
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-3 col-md-6 col-sm-6">
-        <app-admin-panel-button (currentComponent)="handleEventFromAdminButtonComponent($event)"></app-admin-panel-button>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-3">
-            @if(currentComponents==="seance"){
-                <app-admin-panel-seance></app-admin-panel-seance>
-            }
-            @else if (currentComponents==="movie") {
-                <app-admin-panel-movie></app-admin-panel-movie>
-            }
-            @else if (currentComponents==="user") {
-                <app-admin-panel-user></app-admin-panel-user>
-            }
-            
-        </div>
-    </div>
+    <app-admin-panel-button (currentComponent)="handleEventFromAdminButtonComponent($event)"></app-admin-panel-button>
+
+    @if(currentComponents==="seance"){
+       <app-admin-panel-seance></app-admin-panel-seance>
+    }
+     @else if (currentComponents==="movie") {
+      <app-admin-panel-movie></app-admin-panel-movie>
+     }
+    @else if (currentComponents==="user") {
+      <app-admin-panel-user></app-admin-panel-user>
+     }
+    
 </div>
