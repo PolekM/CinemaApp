@@ -55,4 +55,9 @@ public class MovieController {
         return movieService.movieSearch(text);
 
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMovieById(@PathVariable(name = "id") Integer id){
+        return movieService.deleteMovieById(id);
+    }
 }

@@ -93,4 +93,11 @@ public class MovieServiceImp implements MovieService {
         return collect;
 
     }
+
+    @Override
+    public ResponseEntity<String> deleteMovieById(Integer id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException("Movie doesn't exist"));
+        movieRepository.delete(movie);
+        return ResponseEntity.ok("Movie has been deleted");
+    }
 }

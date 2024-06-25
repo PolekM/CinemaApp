@@ -21,4 +21,6 @@ public interface MovieService {
     MovieReadDto getMovieById(int movieId);
 
     List<MovieReadDto> movieSearch(String text);
+
+    ResponseEntity<String> deleteMovieById(Integer id);
 }

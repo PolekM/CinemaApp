@@ -16,4 +16,8 @@ export class AdminProfileService {
   getAllMovie(pageNo: number): Observable<MoviePageableDto>{
     return this.httpClient.get<MoviePageableDto>(`${this.movieBaseUrl}`+'?pageNo='+pageNo)
   }
+
+  deleteMovieById(id: number):Observable<string>{
+    return this.httpClient.delete<string>(`${this.movieBaseUrl}`+"/"+id)
+  }
 }

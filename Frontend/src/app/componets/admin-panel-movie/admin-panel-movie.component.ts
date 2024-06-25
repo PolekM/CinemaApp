@@ -12,6 +12,7 @@ import { AdminProfileService } from '../../service/admin-profile.service';
 export class AdminPanelMovieComponent implements OnInit {
 
   movies: MoviePageableDto = {} as MoviePageableDto;
+  msg: string =''
 
   constructor(private adminService: AdminProfileService){
 
@@ -22,6 +23,11 @@ export class AdminPanelMovieComponent implements OnInit {
 
   getAllMovie(pageNo: number){
     this.adminService.getAllMovie(pageNo).subscribe(Response =>{this.movies = Response})
+  }
+
+  deleteMovieById(id: number){
+    this.adminService.deleteMovieById(id).subscribe(Response => {this.msg = Response
+    })
   }
 
 }

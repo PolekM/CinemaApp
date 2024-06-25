@@ -21,7 +21,7 @@
             <li class="list-group-item"><img src={{item.movieUrl}}  class="img-thumbnail"></li>
             <li class="list-group-item">{{item.title}}</li>
             <li class="list-group-item"><button type="button" class="btn btn-warning">Edit</button></li>
-            <li class="list-group-item"><button type="button" class="btn btn-danger">Delete</button></li>
+            <li class="list-group-item"><button type="button" class="btn btn-danger" (click)="deleteMovieById(item.movieId)">Delete</button></li>
         </ul>
         }
     </div>
