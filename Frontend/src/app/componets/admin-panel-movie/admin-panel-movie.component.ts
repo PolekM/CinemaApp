@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviePageableDto } from '../../entity/MoviePageableDto';
 import { AdminProfileService } from '../../service/admin-profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel-movie',
@@ -14,7 +15,7 @@ export class AdminPanelMovieComponent implements OnInit {
   movies: MoviePageableDto = {} as MoviePageableDto;
   msg: string =''
 
-  constructor(private adminService: AdminProfileService){
+  constructor(private adminService: AdminProfileService, private router: Router){
 
   }
   ngOnInit(): void {
@@ -26,7 +27,9 @@ export class AdminPanelMovieComponent implements OnInit {
   }
 
   deleteMovieById(id: number){
-    this.adminService.deleteMovieById(id).subscribe(Response => {this.msg = Response
+    this.adminService.deleteMovieById(id).subscribe(Response => {
+      this.msg = Response 
+      this.ngOnInit()
     })
   }
 

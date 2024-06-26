@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -27,6 +29,8 @@ public class Movie {
     @ManyToOne
     @JoinColumn(name = "species_id")
     private Species species;
+        @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Seance> seance;
 
     public Movie(MovieSaveDto movieSaveDto, Species species) {
         this.title = movieSaveDto.getTitle();

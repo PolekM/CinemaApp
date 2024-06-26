@@ -18,6 +18,6 @@ export class AdminProfileService {
   }
 
   deleteMovieById(id: number):Observable<string>{
-    return this.httpClient.delete<string>(`${this.movieBaseUrl}`+"/"+id)
+    return this.httpClient.delete<string>(`${this.movieBaseUrl}`+"/"+id, { responseType: 'text' as 'json' })
   }
 }
