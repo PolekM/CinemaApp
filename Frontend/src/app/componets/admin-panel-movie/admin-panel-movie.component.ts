@@ -3,6 +3,8 @@ import { MoviePageableDto } from '../../entity/MoviePageableDto';
 import { AdminProfileService } from '../../service/admin-profile.service';
 import { Router } from '@angular/router';
 import { movieReadDto } from '../../entity/movieReadDto';
+import { SpeciesReadDto } from '../../entity/SpeciesReadDto';
+import { SpeciesService } from '../../service/species.service';
 
 @Component({
   selector: 'app-admin-panel-movie',
@@ -16,12 +18,17 @@ export class AdminPanelMovieComponent implements OnInit {
   movies: MoviePageableDto = {} as MoviePageableDto;
   msg: string =''
   editedMovie: movieReadDto = {} as movieReadDto
+  species: SpeciesReadDto[] = []
 
-  constructor(private adminService: AdminProfileService, private router: Router){
+  constructor(private adminService: AdminProfileService,private speciesService: SpeciesService, private router: Router){
 
   }
   ngOnInit(): void {
     this.getAllMovie(0);
+    if(this.species.length==0){
+      this.getAllSpecies();
+      console.log("here")
+    }
   }
 
   getAllMovie(pageNo: number){
@@ -36,5 +43,9 @@ export class AdminPanelMovieComponent implements OnInit {
   }
   setMovieToEdit(item: movieReadDto){
     this.editedMovie = item;
+  }
+
+  getAllSpecies(){
+    this.speciesService.getAllSpecies().subscribe(response => {this.species = response})
   }
 }

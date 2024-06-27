@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/species")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SpeciesController {
 
     private final SpeciesService speciesService;
