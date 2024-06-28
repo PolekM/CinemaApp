@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { movieReadDto } from '../entity/movieReadDto';
 import { MoviePageableDto } from '../entity/MoviePageableDto';
+import { movieUpdatedDto } from '../entity/movieUpdatedDto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,9 @@ export class AdminProfileService {
 
   deleteMovieById(id: number):Observable<string>{
     return this.httpClient.delete<string>(`${this.movieBaseUrl}`+"/"+id, { responseType: 'text' as 'json' })
+  }
+
+  updateMovie(updatedMovie: movieUpdatedDto, id: number):Observable<string>{
+    return this.httpClient.put<string>(`${this.movieBaseUrl}`+"/update/"+id,updatedMovie, { responseType: 'text' as 'json' })
   }
 }

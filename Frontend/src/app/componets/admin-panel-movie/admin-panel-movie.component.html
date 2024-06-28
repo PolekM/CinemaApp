@@ -35,34 +35,34 @@
               <form>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="formGroupExampleInput" value={{editedMovie.title}}>
+                  <input type="text" class="form-control" id="formGroupExampleInput" name="idInput" [(ngModel)]="editedMovie.title">
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1" class="form-label">URL</label>
-                  <input type="text" class="form-control" id="formGroupExampleInput" value={{editedMovie.movieUrl}}>
+                  <input type="text" class="form-control" id="formGroupExampleInput" name="URLInput" [(ngModel)]="editedMovie.movieUrl">
                 </div>
                 <label for="exampleFormControlTextarea1" class="form-label">Species</label>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>{{editedMovie.speciesName}}</option>
+                <select class="form-select" aria-label="Default select example" name="speciesInput" [(ngModel)]="editedMovie.speciesName">
+                  <option [ngValue]="editedMovie.speciesName">{{editedMovie.speciesName}}</option>
                   @for (s of species; track $index) {
                     @if(s.speciesName!=editedMovie.speciesName){
-                      <option value="1">{{s.speciesName}}</option>
+                      <option [ngValue]="s.speciesName">{{s.speciesName}}</option>
                     }                 
                   }
                 </select>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1" class="form-label">Year Of Production</label>
-                  <input type="number" class="form-control" id="formGroupExampleInput" value={{editedMovie.yearOfProduction}}>
+                  <input type="number" class="form-control" id="formGroupExampleInput" name="UORInput" [(ngModel)]="editedMovie.yearOfProduction">
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1" class="form-label">description</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" value={{editedMovie.description}}></textarea>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="descriptionInput" [(ngModel)]="editedMovie.description"></textarea>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-primary" (click)="updateMovie()" data-bs-dismiss="modal">Save changes</button>
             </div>
           </div>
         </div>
