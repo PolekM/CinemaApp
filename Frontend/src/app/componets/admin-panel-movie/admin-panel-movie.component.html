@@ -67,4 +67,22 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <ul class="pagination justify-content-center text-center">
+  
+            <li class="page-item" >
+              <a class="page-link" aria-label="Previous" [class.disabled]="movies.currentPage+1 === 1" (click)="getAllMovie(movies.currentPage-1)">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only"></span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" >{{movies.currentPage+1}}</a></li>
+            <li class="page-item">
+              <a class="page-link" aria-label="Next" [class.disabled]="movies.currentPage+1 === movies.totalPage"  (click)="getAllMovie(movies.currentPage+1)">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only"></span>
+              </a>
+            </li>
+          </ul>
+      </div>
 </div>
