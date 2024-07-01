@@ -1,5 +1,6 @@
 package com.cinema.service.imp;
 
+import com.cinema.dto.AppUser.UserListDto;
 import com.cinema.dto.AppUser.UserReadDataDto;
 import com.cinema.dto.auth.ChangePasswordDto;
 import com.cinema.entity.AppUser;
@@ -7,6 +8,8 @@ import com.cinema.exception.auth.WrongPasswordException;
 import com.cinema.repository.AppUserRepository;
 import com.cinema.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,6 +19,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.awt.print.Pageable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AppUserServiceImp implements AppUserService {
@@ -60,5 +67,12 @@ public class AppUserServiceImp implements AppUserService {
             throw new UsernameNotFoundException("User Not Found");
         }
 
+    }
+
+    @Override
+    public List<UserListDto> getAllUser(Integer pageNo, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo,pageSize);
+        Page<AppUser> allUsers = appUserRepository.findAll(pageRequest);
+        return allUsers.getContent().stream().map(UserListDto::new).collect(Collectors.toList());
     }
 }

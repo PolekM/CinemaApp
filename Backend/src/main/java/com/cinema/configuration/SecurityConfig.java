@@ -59,6 +59,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("species/add", "/species/update/**").hasRole("ADMIN")
                         .requestMatchers("/movie/add", "/movie/update/**").hasRole("ADMIN")
+                        .requestMatchers(("/profile/users")).hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/movie/{id}").hasRole("ADMIN")
                         .requestMatchers("/seance/add", "/seance/update/**").hasRole("ADMIN")
                         .requestMatchers("/species", "/seance", "/seance/date/**", "/movie", "/movie/{id}", "/register", "/login", "custom-login", "/user","/seance/onScreen","/seance/nearest/movie/**").permitAll()
