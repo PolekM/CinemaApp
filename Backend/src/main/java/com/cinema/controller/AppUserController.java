@@ -1,8 +1,10 @@
 package com.cinema.controller;
 
+import com.cinema.dto.AppUser.UserChangeRoleDto;
 import com.cinema.dto.AppUser.UserListDto;
 import com.cinema.dto.AppUser.UserReadDataDto;
 import com.cinema.dto.auth.ChangePasswordDto;
+import com.cinema.entity.AppRole;
 import com.cinema.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +41,13 @@ public class AppUserController {
 
         return appUserService.getAllUser(pageNo,pageSize);
 
+    }
+    @GetMapping("/role")
+    public List<AppRole> getAllRole(){
+        return appUserService.getAllUserRole();
+    }
+    @PutMapping("/role/change")
+    public ResponseEntity<String> changeUserRole(@RequestBody UserChangeRoleDto userChangeRoleDto){
+        return appUserService.changeUserRole(userChangeRoleDto);
     }
 }

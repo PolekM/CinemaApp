@@ -1,1 +1,53 @@
-<h2>User management</h2>
+<div class="row">
+    <div class="col text-center">
+        <h2>Users management</h2>
+    </div> 
+</div>
+<div class="row">
+        <div class="col">
+            <ul class="list-group list-group-horizontal justify-content-center">
+                <li class="list-group-item"><b>Id</b></li>
+                <li class="list-group-item"><b>User Name</b></li>
+                <li class="list-group-item"><b>Role</b></li>
+                <li class="list-group-item"><b>Edit</b></li>
+            </ul>
+            @for (user of userList; track $index) {
+                <ul class="list-group list-group-horizontal justify-content-center">
+                    <li class="list-group-item"><b>{{user.id}}</b></li>
+                    <li class="list-group-item"><b>{{user.userName}}</b></li>
+                    <li class="list-group-item"><b>{{user.appRole.roleName}}</b></li>
+                    <li class="list-group-item"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setEditUser(user)">Edit</button></li>
+                </ul>
+
+            }
+        </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <label for="exampleFormControlTextarea1" class="form-label">Role</label>
+              <select class="form-select" aria-label="Default select example" name="roleInput" [(ngModel)]="editedUser.appRole">
+                <option [ngValue]="editedUser.appRole">{{editedUser.appRole.roleName}}</option>
+                @for (r of userRole; track $index) {
+                  @if(r.roleName!=editedUser.appRole.roleName){
+                    <option [ngValue]="r">{{r.roleName}}</option>
+                  }                 
+                }
+              </select>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateRole()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+     
+

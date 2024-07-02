@@ -1,8 +1,10 @@
 package com.cinema.service.imp;
 
+import com.cinema.dto.AppUser.UserChangeRoleDto;
 import com.cinema.dto.AppUser.UserListDto;
 import com.cinema.dto.AppUser.UserReadDataDto;
 import com.cinema.dto.auth.ChangePasswordDto;
+import com.cinema.entity.AppRole;
 import com.cinema.entity.AppUser;
 import com.cinema.exception.auth.WrongPasswordException;
 import com.cinema.repository.AppUserRepository;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,6 +61,28 @@ public class AppUserServiceImp implements AppUserService {
         return userReadDataDto;
     }
 
+
+
+    @Override
+    public List<UserListDto> getAllUser(Integer pageNo, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo,pageSize);
+        Page<AppUser> allUsers = appUserRepository.findAll(pageRequest);
+        return allUsers.getContent().stream().map(UserListDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AppRole> getAllUserRole() {
+        return appUserRepository.findAllRole();
+    }
+
+    @Override
+    public ResponseEntity<String> changeUserRole(UserChangeRoleDto appRole) {
+        AppUser appUser = appUserRepository.findById(appRole.getId()).orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
+        appUser.updateUserRole(appRole.getAppRole());
+        appUserRepository.save(appUser);
+        return new ResponseEntity<>("Your role has been change", HttpStatus.OK);
+    }
+
     private String getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
@@ -67,12 +92,5 @@ public class AppUserServiceImp implements AppUserService {
             throw new UsernameNotFoundException("User Not Found");
         }
 
-    }
-
-    @Override
-    public List<UserListDto> getAllUser(Integer pageNo, Integer pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNo,pageSize);
-        Page<AppUser> allUsers = appUserRepository.findAll(pageRequest);
-        return allUsers.getContent().stream().map(UserListDto::new).collect(Collectors.toList());
     }
 }

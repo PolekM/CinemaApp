@@ -46,6 +46,11 @@ public class AppUser implements UserDetails {
         return this;
     }
 
+    public AppUser updateUserRole(AppRole appRole){
+        this.userRole = appRole;
+        return this;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(this.userRole.getRoleName()));

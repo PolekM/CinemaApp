@@ -91,6 +91,18 @@ public class DataInitializer implements CommandLineRunner {
                 "$2a$12$YjozNDf3nr5WrC841hoh2.1pDqhmI42rJnzjU97mzAPKfLYsmeRBy",
                 "user@user.pl",
                 initAppRoleTable().get(1)));
+        appUserList.add(new AppUser(
+                3,
+                "user2",
+                "$2a$12$YjozNDf3nr5WrC841hoh2.1pDqhmI42rJnzjU97mzAPKfLYsmeRBy",
+                "user2@user.pl",
+                initAppRoleTable().get(1)));
+        appUserList.add(new AppUser(
+                4,
+                "user3",
+                "$2a$12$YjozNDf3nr5WrC841hoh2.1pDqhmI42rJnzjU97mzAPKfLYsmeRBy",
+                "user3@user.pl",
+                initAppRoleTable().get(1)));
         return appUserList;
     }
 
