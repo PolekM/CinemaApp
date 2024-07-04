@@ -6,6 +6,7 @@ import { movieUpdatedDto } from '../entity/movieUpdatedDto';
 import { UserListDto } from '../entity/UserListDto';
 import { appRole } from '../entity/AppRole';
 import { UserChangeRoleDto } from '../entity/UserChangeRoleDto';
+import { seanceReadDto } from '../entity/seanceReadDto';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class AdminProfileService {
 
   movieBaseUrl = 'http://localhost:8080/movie'
   userBaseUrL = 'http://localhost:8080/profile'
+  seanceBaseUrl = 'http://localhost:8080/seance'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -38,5 +40,9 @@ export class AdminProfileService {
 
   updateUserRole(user: UserChangeRoleDto):Observable<String>{
     return this.httpClient.put<String>(`${this.userBaseUrL}`+"/role/change",user, { responseType: 'text' as 'json' })
+  }
+
+  getAllSeance():Observable<seanceReadDto[]>{
+    return this.httpClient.get<seanceReadDto[]>(`${this.seanceBaseUrl}`)
   }
 }
