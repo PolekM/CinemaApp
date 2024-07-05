@@ -252,10 +252,10 @@ public class DataInitializer implements CommandLineRunner {
                 1));
         seanceSaveDto.add(new SeanceSaveDto(
                 20,
-                LocalDateTime.now().plusHours(1),
-                LocalDateTime.now().plusHours(3),
-                2,
-                2));
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusHours(1),
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusHours(3),
+                1,
+                4));
         seanceSaveDto.add(new SeanceSaveDto(
                 20,
                 LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES).plusDays(1),
