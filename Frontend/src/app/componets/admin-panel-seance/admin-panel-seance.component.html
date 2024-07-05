@@ -23,8 +23,9 @@
                     <li class="list-group-item"><b>{{s.startTime}}</b></li>
                     <li class="list-group-item"><b>{{s.endTime}}</b></li>
                     <li class="list-group-item"><b>{{s.ticketCost}}</b></li>
-                    <li class="list-group-item"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button></li>
+                    <li class="list-group-item"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setEditedSeance(s)">Edit</button></li>
                 </ul>
 
             }
         </div>
+</div>
