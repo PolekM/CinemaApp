@@ -4,6 +4,11 @@
         <h2>Movie management</h2>
     </div> 
 </div>
+<div class="row">
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="chagneFlag('add')">Add Movie</button>
+  </div>
+</div>
 
 <div class="row">
     <div class="col">
@@ -20,7 +25,7 @@
             <li class="list-group-item">{{item.movieId}}</li>
             <li class="list-group-item"><img src={{item.movieUrl}}  class="img-thumbnail"></li>
             <li class="list-group-item">{{item.title}}</li>
-            <li class="list-group-item"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setMovieToEdit(item)">Edit</button></li>
+            <li class="list-group-item"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="setMovieToEdit(item)" (click)="chagneFlag('edit')">Edit</button></li>
             <li class="list-group-item"><button type="button" class="btn btn-danger" (click)="deleteMovieById(item.movieId)">Delete</button></li>
         </ul>
         }
@@ -29,7 +34,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetEditedMovie()"></button>
             </div>
             <div class="modal-body">
               <form>
@@ -61,8 +66,15 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" (click)="updateMovie()" data-bs-dismiss="modal">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetEditedMovie()">Close</button>
+              @if (flag) {
+                <button type="button" class="btn btn-primary" (click)="addNewMovie()" data-bs-dismiss="modal">Add</button>
+              }
+              @else {
+                <button type="button" class="btn btn-primary" (click)="updateMovie()" data-bs-dismiss="modal">Save</button>
+              }
+              
+             
             </div>
           </div>
         </div>

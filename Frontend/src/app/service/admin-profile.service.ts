@@ -7,6 +7,7 @@ import { UserListDto } from '../entity/UserListDto';
 import { appRole } from '../entity/AppRole';
 import { UserChangeRoleDto } from '../entity/UserChangeRoleDto';
 import { seanceReadDto } from '../entity/seanceReadDto';
+import { MovieSaveDto } from '../entity/MovieSaveDto';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,9 @@ export class AdminProfileService {
 
   getAllSeance():Observable<seanceReadDto[]>{
     return this.httpClient.get<seanceReadDto[]>(`${this.seanceBaseUrl}`)
+  }
+
+  addNewMovie(movieSaveDto: MovieSaveDto):Observable<string>{
+    return this.httpClient.post<string>(`${this.movieBaseUrl}`+"/add",movieSaveDto, {responseType: 'json'})
   }
 }
