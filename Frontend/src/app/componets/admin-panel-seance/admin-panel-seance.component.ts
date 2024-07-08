@@ -32,5 +32,9 @@ export class AdminPanelSeanceComponent implements OnInit {
     this.editedSeance = seance;
   }
 
+  updateSeance(){
+    
+  }
+
 
 }
