@@ -10,9 +10,6 @@ CinemaApp is an application for managing cinemas, allowing users to book tickets
 - [Usage Examples](#usage-examples)
 - [License](#license)
 
-## Description
-CinemaApp is an application that enables users to book tickets for movie screenings in cinemas. The app offers an interface for both customers and cinema employees, allowing the management of screenings, halls, and reservations.
-
 **Note:** This project is currently under development, and not all features are fully implemented.
 
 ### Features
